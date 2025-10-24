@@ -1,0 +1,791 @@
+/* Estilos específicos para responsive */
+@media (max-width: 1200px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image {
+        order: -1;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .process-steps,
+    .values-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    /* Contact Page */
+    .contact-content {
+        gap: 40px;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    /* Services Page */
+    .service-detail .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .service-detail .about-image {
+        order: -1;
+    }
+
+    .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        height: 50px;
+    }
+
+    .logo-image {
+        max-height: 50px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--primary-color);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        transition: var(--transition);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        margin: 15px 0;
+    }
+
+    .language-switcher {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .project-card {
+        height: 250px;
+    }
+
+    .project-info {
+        padding: 18px;
+    }
+
+    .project-text-content {
+        margin-bottom: 12px;
+    }
+
+    .project-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .project-info p {
+        font-size: 0.9rem;
+        margin-bottom: 0;
+    }
+
+    .btn-project {
+        padding: 10px 22px;
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+
+    .btn-icon {
+        font-size: 0.8rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .project-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .process-steps,
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Contact Page Responsive */
+    .contact-info-card,
+    .contact-form-wrapper {
+        padding: 30px;
+    }
+
+    .map-placeholder {
+        padding: 60px 30px;
+    }
+
+    .map-placeholder i {
+        font-size: 3rem;
+    }
+
+    .faq-item {
+        padding: 25px;
+    }
+
+    /* Services Page Responsive */
+    .services-hero h2 {
+        font-size: 2.8rem;
+    }
+
+    .typewriter-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .service-detail .about-text {
+        padding: 30px 20px;
+    }
+
+    .service-detail h3 {
+        font-size: 1.9rem;
+    }
+
+    .service-detail p {
+        font-size: 1rem;
+    }
+
+    .service-detail ul li {
+        font-size: 0.95rem;
+    }
+
+    .process-section {
+        padding: 50px 30px;
+    }
+
+    .process-section .section-title h3 {
+        font-size: 2.2rem;
+    }
+
+    .process-step {
+        padding: 30px 20px;
+    }
+
+    .process-step .step-number {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .process-step h4 {
+        font-size: 1.2rem;
+    }
+
+    /* Projects Hero Responsive */
+    .projects-hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+
+    .projects-hero-title {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+    .projects-hero-subtitle {
+        font-size: 1.4rem;
+        min-height: 1.8rem;
+    }
+
+    .typewriter-cursor {
+        font-size: 1.4rem;
+    }
+
+    .projects-hero-desc {
+        font-size: 1rem;
+    }
+
+    .projects-filter {
+        margin: 40px 0 30px;
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    /* Grid simple en Tablet - SIN animaciones */
+    .horizontal-scroll-section {
+        height: auto;
+        padding: 60px 0;
+    }
+
+    .horizontal-scroll-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding: 0 20px;
+        transform: none !important;
+    }
+
+    .horizontal-scroll-container.no-scroll {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .horizontal-project-card {
+        width: 100%;
+        height: 350px;
+    }
+
+    .horizontal-project-card .project-info {
+        padding: 18px;
+    }
+
+    .horizontal-project-card .project-text-content {
+        margin-bottom: 12px;
+    }
+
+    .horizontal-project-card .project-info h3 {
+        font-size: 1.25rem;
+    }
+
+    .horizontal-project-card .project-info p {
+        font-size: 0.95rem;
+    }
+
+    .horizontal-project-card .btn-project {
+        padding: 10px 24px;
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo {
+        height: 40px;
+    }
+
+    .logo-image {
+        max-height: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+
+    .project-card {
+        height: 200px;
+    }
+
+    .project-info {
+        padding: 15px;
+    }
+
+    .project-text-content {
+        margin-bottom: 10px;
+    }
+
+    .project-info h3 {
+        font-size: 1.05rem;
+        margin-bottom: 6px;
+    }
+
+    .project-info p {
+        font-size: 0.85rem;
+        margin-bottom: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .btn-project {
+        padding: 8px 18px;
+        font-size: 0.75rem;
+        gap: 6px;
+    }
+
+    .btn-icon {
+        font-size: 0.7rem;
+    }
+
+    .service-card {
+        padding: 20px;
+    }
+
+    .about-image::before {
+        top: 10px;
+        left: 10px;
+    }
+
+    .project-header h1 {
+        font-size: 2rem;
+    }
+
+    .project-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .map-container {
+        height: 300px;
+    }
+
+    /* Contact Page Mobile */
+    .contact-info-card,
+    .contact-form-wrapper {
+        padding: 25px 20px;
+    }
+
+    .contact-info-card h3,
+    .contact-form h3 {
+        font-size: 1.5rem;
+    }
+
+    .contact-item {
+        padding: 15px 0;
+    }
+
+    .contact-item i {
+        font-size: 1.2rem;
+    }
+
+    .contact-hours,
+    .contact-social {
+        margin-top: 25px;
+        padding-top: 20px;
+    }
+
+    .contact-social .social-links a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .map-placeholder {
+        padding: 50px 20px;
+    }
+
+    .map-placeholder i {
+        font-size: 2.5rem;
+    }
+
+    .map-placeholder h4 {
+        font-size: 1.2rem;
+    }
+
+    .faq-section {
+        margin-top: 60px;
+    }
+
+    .faq-item {
+        padding: 20px;
+    }
+
+    .faq-item h4 {
+        font-size: 1.05rem;
+    }
+
+    /* Services Page Mobile */
+    .services-hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .typewriter-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .service-detail {
+        margin-bottom: 70px;
+    }
+
+    .service-detail .about-text {
+        padding: 20px 10px;
+    }
+
+    .service-detail h3 {
+        font-size: 1.6rem;
+    }
+
+    .service-detail p {
+        font-size: 0.95rem;
+    }
+
+    .service-detail ul li {
+        font-size: 0.9rem;
+        padding: 10px 0 10px 30px;
+    }
+
+    .process-section {
+        padding: 40px 20px;
+        margin-top: 70px;
+    }
+
+    .process-section .section-title h3 {
+        font-size: 1.9rem;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .process-step {
+        padding: 25px 20px;
+    }
+
+    .process-step .step-number {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+        border-width: 3px;
+    }
+
+    .process-step h4 {
+        font-size: 1.1rem;
+    }
+
+    .process-step p {
+        font-size: 0.95rem;
+    }
+
+    .view-more .btn {
+        padding: 15px 40px;
+        font-size: 1rem;
+    }
+
+    /* Projects Hero Small Screen */
+    .projects-hero {
+        height: 50vh;
+        min-height: 350px;
+    }
+
+    .projects-hero-title {
+        font-size: 2rem;
+    }
+
+    .projects-hero-subtitle {
+        font-size: 1.2rem;
+        min-height: 1.5rem;
+    }
+
+    .typewriter-cursor {
+        font-size: 1.2rem;
+    }
+
+    .projects-hero-desc {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+
+    .projects-filter {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 20px;
+    }
+
+    .filter-btn {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Grid simple en Mobile - 1 columna, SIN animaciones */
+    .horizontal-scroll-section {
+        height: auto;
+        padding: 40px 0;
+    }
+
+    .horizontal-scroll-container,
+    .horizontal-scroll-container.no-scroll {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 15px;
+        transform: none !important;
+    }
+
+    .horizontal-project-card {
+        width: 100%;
+        height: 320px;
+    }
+
+    .horizontal-project-card .project-info {
+        padding: 15px;
+    }
+
+    .horizontal-project-card .project-text-content {
+        margin-bottom: 10px;
+    }
+
+    .horizontal-project-card .project-info h3 {
+        font-size: 1.15rem;
+    }
+
+    .horizontal-project-card .project-info p {
+        font-size: 0.9rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .horizontal-project-card .btn-project {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    /* Project Detail Responsive */
+    .project-detail-hero {
+        height: 50vh;
+        min-height: 400px;
+        background-attachment: scroll;
+    }
+
+    .project-detail-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .project-detail-hero .project-category {
+        font-size: 1rem;
+    }
+
+    .back-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .project-meta-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .meta-item {
+        padding: 20px;
+    }
+
+    .project-description-section h2,
+    .project-gallery-section h2,
+    .project-features-section h2,
+    .project-process-section h2,
+    .team-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .project-description-text {
+        font-size: 1rem;
+    }
+
+    .project-gallery {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .process-content {
+        padding: 25px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .team-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Project Detail Tablet */
+    .project-detail-hero {
+        height: 60vh;
+        min-height: 450px;
+    }
+
+    .project-detail-hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .project-meta-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Values Commitment Section Responsive */
+@media (max-width: 768px) {
+    .values-commitment-section {
+        padding: 80px 0;
+        min-height: auto;
+    }
+
+    .values-background {
+        background-attachment: scroll;
+    }
+
+    .values-grid-home {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .values-commitment-section .value-card {
+        padding: 35px 25px;
+    }
+
+    .value-icon-circle {
+        width: 70px;
+        height: 70px;
+    }
+
+    .value-icon-circle i {
+        font-size: 1.7rem;
+    }
+
+    .values-commitment-section .value-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .values-commitment-section .value-card p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .values-commitment-section {
+        padding: 60px 0;
+    }
+
+    .values-grid-home {
+        gap: 20px;
+    }
+
+    .values-commitment-section .value-card {
+        padding: 30px 20px;
+    }
+
+    .value-icon-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .value-icon-circle i {
+        font-size: 1.5rem;
+    }
+
+    .values-commitment-section .value-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .values-commitment-section .value-card p {
+        font-size: 0.9rem;
+    }
+}
+
+/* WhatsApp Button Responsive */
+@media (max-width: 576px) {
+    .whatsapp-float-button {
+        width: 55px;
+        height: 55px;
+        font-size: 1.7rem;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .whatsapp-tooltip {
+        right: 70px;
+        font-size: 0.8rem;
+        padding: 8px 14px;
+    }
+
+    .btn-whatsapp {
+        padding: 12px 25px;
+        font-size: 0.8rem;
+        gap: 8px;
+    }
+
+    .btn-whatsapp i {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-buttons .btn,
+    .hero-buttons .btn-whatsapp {
+        width: 100%;
+        justify-content: center;
+    }
+}
