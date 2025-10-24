@@ -44,7 +44,7 @@ export const projectsData = [
     },
     team: [
       {
-        name: 'GS Arquitecto',
+        name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Responsable del diseño conceptual y dirección general del proyecto.', en: 'Responsible for conceptual design and overall project direction.' }
       },
@@ -105,7 +105,7 @@ export const projectsData = [
     },
     team: [
       {
-        name: 'GS Arquitecto',
+        name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Diseño conceptual y coordinación general del proyecto.', en: 'Conceptual design and overall project coordination.' }
       },
@@ -166,7 +166,7 @@ export const projectsData = [
     },
     team: [
       {
-        name: 'GS Arquitecto',
+        name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Dirección del proyecto y diseño de la remodelación.', en: 'Project direction and renovation design.' }
       },
@@ -227,7 +227,7 @@ export const projectsData = [
     },
     team: [
       {
-        name: 'GS Arquitecto',
+        name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Diseño conceptual y gestión de permisos ambientales.', en: 'Conceptual design and environmental permits management.' }
       },
@@ -288,7 +288,7 @@ export const projectsData = [
     },
     team: [
       {
-        name: 'GS Arquitecto',
+        name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Diseño arquitectónico y coordinación LEED.', en: 'Architectural design and LEED coordination.' }
       },
@@ -349,7 +349,7 @@ export const projectsData = [
     },
     team: [
       {
-        name: 'GS Arquitecto',
+        name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Diseño conceptual y dirección de la remodelación.', en: 'Conceptual design and renovation direction.' }
       },

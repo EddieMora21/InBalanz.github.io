@@ -19,8 +19,8 @@ const About = () => {
             <h2>{t('philosophy.title')}</h2>
             <p>
               {currentLang === 'es'
-                ? 'En GS Arquitecto, creemos que la arquitectura debe ser más que simplemente funcional o estética. Nuestro enfoque se centra en crear espacios que promuevan el bienestar de sus habitantes a través de la integración con la naturaleza y el uso de estrategias de diseño pasivo.'
-                : 'At GS Arquitecto, we believe architecture should be more than just functional or aesthetic. Our approach focuses on creating spaces that promote the well-being of their inhabitants through integration with nature and the use of passive design strategies.'}
+                ? 'En InBalanZ, creemos que la arquitectura debe ser más que simplemente funcional o estética. Nuestro enfoque se centra en crear espacios que promuevan el bienestar de sus habitantes a través de la integración con la naturaleza y el uso de estrategias de diseño pasivo.'
+                : 'At InBalanZ, we believe architecture should be more than just functional or aesthetic. Our approach focuses on creating spaces that promote the well-being of their inhabitants through integration with nature and the use of passive design strategies.'}
             </p>
             <p>
               {currentLang === 'es'
@@ -144,11 +144,11 @@ const About = () => {
               <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Team" />
             </div>
             <div className="about-text">
-              <h3>GS Arquitecto</h3>
+              <h3>InBalanZ</h3>
               <p>
                 {currentLang === 'es'
-                  ? 'Fundador y director creativo de GS Arquitecto. Con más de 15 años de experiencia en diseño arquitectónico, especializado en arquitectura sostenible y diseño bioclimático.'
-                  : 'Founder and creative director of GS Arquitecto. With over 15 years of experience in architectural design, specialized in sustainable architecture and bioclimatic design.'}
+                  ? 'Fundador y director creativo de InBalanZ. Con más de 15 años de experiencia en diseño arquitectónico, especializado en arquitectura sostenible y diseño bioclimático.'
+                  : 'Founder and creative director of InBalanZ. With over 15 years of experience in architectural design, specialized in sustainable architecture and bioclimatic design.'}
               </p>
               <p>
                 {currentLang === 'es'

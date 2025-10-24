@@ -31,7 +31,7 @@ const Header = () => {
       <div className="container">
         <div className="header-container">
           <Link to="/" className="logo" onClick={closeMenu}>
-            <img src="/logo-principal.webp" alt="GS Arquitecto" className="logo-image" />
+            <img src="/logo-principal.webp" alt="InBalanZ" className="logo-image" />
           </Link>
           <nav>
             <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>

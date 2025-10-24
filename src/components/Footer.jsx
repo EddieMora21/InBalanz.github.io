@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-column">
-            <h3>GS Arquitecto</h3>
+            <h3>InBalanZ</h3>
             <p>{t('footer.description')}</p>
           </div>
           <div className="footer-column">
@@ -46,7 +46,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="copyright">
-          <p>&copy; 2023 GS Arquitecto. {t('footer.allRightsReserved')}</p>
+          <p>&copy; 2023 InBalanZ. {t('footer.allRightsReserved')}</p>
         </div>
       </div>
     </footer>
