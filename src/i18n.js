@@ -14,7 +14,7 @@ const resources = {
       },
       // Hero
       hero: {
-        title: 'Arquitectura en equilibrio',
+        title: 'Arquitectura en equilibrio con',
         subtitle: 'Integramos naturaleza y estrategias pasivas para crear espacios que conectan con sus habitantes y embellecen con el tiempo.',
         viewProjects: 'Ver Proyectos',
         contactUs: 'Contactar'
@@ -29,6 +29,7 @@ const resources = {
         filterResidential: 'Residencial',
         filterCommercial: 'Comercial',
         filterRemodeling: 'Remodelación',
+        filterVisualizations: 'Anteproyectos',
         category: 'Categoría',
         client: 'Cliente',
         location: 'Ubicación',
@@ -38,6 +39,13 @@ const resources = {
         mainFeatures: 'Características Principales',
         processAndChallenges: 'Proceso y Desafíos',
         team: 'Equipo del Proyecto'
+      },
+      // Testimonials
+      testimonials: {
+        title: 'Lo Que Dicen Nuestros Clientes',
+        subtitle: 'Experiencias reales de quienes confiaron en nosotros',
+        detailedTitle: 'Testimonios Detallados',
+        detailedSubtitle: 'Historias completas de proyectos realizados'
       },
       // Services
       services: {
@@ -92,7 +100,7 @@ const resources = {
       },
       // Hero
       hero: {
-        title: 'Architecture in balance',
+        title: 'Architecture in balance with',
         subtitle: 'We integrate nature and passive strategies to create spaces that connect with their inhabitants and beautify over time.',
         viewProjects: 'View Projects',
         contactUs: 'Contact'
@@ -107,6 +115,7 @@ const resources = {
         filterResidential: 'Residential',
         filterCommercial: 'Commercial',
         filterRemodeling: 'Remodeling',
+        filterVisualizations: 'Preliminary Projects',
         category: 'Category',
         client: 'Client',
         location: 'Location',
@@ -116,6 +125,13 @@ const resources = {
         mainFeatures: 'Main Features',
         processAndChallenges: 'Process and Challenges',
         team: 'Project Team'
+      },
+      // Testimonials
+      testimonials: {
+        title: 'What Our Clients Say',
+        subtitle: 'Real experiences from those who trusted us',
+        detailedTitle: 'Detailed Testimonials',
+        detailedSubtitle: 'Complete stories of completed projects'
       },
       // Services
       services: {

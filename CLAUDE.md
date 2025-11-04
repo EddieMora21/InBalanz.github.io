@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-GS Arquitecto - A bilingual (Spanish/English) React-based website for an architecture studio specializing in residential design with natural integration and passive strategies. Built with Vite, React Router, i18next, and GSAP for animations.
+InBalanZ - A bilingual (Spanish/English) React-based website for an architecture studio specializing in residential design with natural integration and passive strategies. Built with Vite, React Router, i18next, and GSAP for animations.
 
 ## Tech Stack
 
@@ -55,8 +55,16 @@ All routes defined in `src/App.jsx`:
   - Bilingual fields: shortDescription, description, features, process (all have `.es` and `.en` properties)
   - Team array with bilingual role and bio
   - Images array (currently using Unsplash URLs)
-- Categories: "Residencial", "Comercial", "Remodelación"
-- Six projects currently defined (IDs 1-6)
+- Categories: "Residencial", "Comercial", "Remodelación", "Visualizaciones"
+- Eight projects currently defined (IDs 1-8)
+
+### Testimonials Data Architecture
+- All testimonial data centralized in `src/data/testimonialsData.js`
+- Each testimonial object includes:
+  - Basic info: id, name, project (bilingual), projectType (bilingual), rating, year
+  - Bilingual fields: shortTestimonial, fullTestimonial
+  - Media: image (project image), clientPhoto
+- Used in TestimonialsCarousel and TestimonialsDetailed components
 
 ### Animation Pattern with GSAP
 - GSAP and ScrollTrigger registered in components that use them
@@ -71,10 +79,15 @@ All routes defined in `src/App.jsx`:
 ```
 src/
 ├── components/
-│   ├── Header.jsx        # Nav with language switcher, mobile hamburger menu
-│   ├── Footer.jsx        # Site footer
-│   ├── ProjectCard.jsx   # Reusable project card for grids
-│   └── ImageModal.jsx    # Modal for image gallery viewing
+│   ├── Header.jsx               # Nav with language switcher, mobile hamburger menu
+│   ├── Footer.jsx               # Site footer
+│   ├── ProjectCard.jsx          # Reusable project card for grids
+│   ├── ImageModal.jsx           # Modal for image gallery viewing
+│   ├── ScrollToTop.jsx          # Scroll to top on route changes
+│   ├── WhatsAppButton.jsx       # Floating WhatsApp contact button
+│   ├── TestimonialsCarousel.jsx # Carousel for short testimonials
+│   ├── TestimonialsDetailed.jsx # Detailed testimonials display
+│   └── ThemeCustomizer.jsx      # Client theme color customization panel
 ├── pages/
 │   ├── Home.jsx          # Hero, featured projects, services preview, philosophy, contact
 │   ├── Projects.jsx      # Full project gallery with category filtering
@@ -82,10 +95,14 @@ src/
 │   ├── Services.jsx      # Services and process sections
 │   ├── About.jsx         # About page
 │   └── Contact.jsx       # Contact page with form
+├── config/
+│   └── themeConfig.js    # Theme customizer configuration and enable/disable flag
 ├── data/
-│   └── projectsData.js   # Central project data store
+│   ├── projectsData.js   # Central project data store
+│   └── testimonialsData.js # Central testimonials data store
 ├── hooks/
-│   └── useScrollEffect.js # Custom hook for scroll-based header styling
+│   ├── useScrollEffect.js      # Custom hook for scroll-based header styling
+│   └── useThemeCustomizer.js   # Custom hook for theme color management
 └── styles/
     ├── style.css         # Main styles with CSS variables
     └── responsive.css    # Media queries and responsive breakpoints
@@ -93,14 +110,54 @@ src/
 
 ### CSS Organization
 - `src/index.css` - Global resets and base styles
-- `src/styles/style.css` - Main component styles with CSS variables:
-  - `--primary-color: #1a1a1a`
-  - `--accent-color: #2e8b57` (green)
-  - `--accent-secondary: #d4af37` (gold)
-  - `--font-primary: 'Montserrat', sans-serif`
-  - `--font-secondary: 'Playfair Display', serif`
+- `src/styles/style.css` - Main component styles with CSS variables (following Brand Identity Guide):
+  - `--primary-color: #002335` (Dark Blue - main brand color)
+  - `--accent-color: #5C7205` (Olive Green - secondary color)
+  - `--accent-secondary: #8A862F` (Lime Green - accents)
+  - `--secondary-color: #F4FFE6` (Medium Gray - backgrounds)
+  - `--neutral-light: #DADADA` (Light Gray)
+  - `--font-primary: 'Poppins', sans-serif` (Main titles and headings)
+  - `--font-secondary: 'Montserrat', sans-serif` (Body text and versatile use)
+  - `--font-body: 'Questrial', sans-serif` (Body text and content)
 - `src/styles/responsive.css` - Mobile-first responsive breakpoints
 - All CSS loaded in `src/main.jsx`
+
+### Theme Customizer System
+**IMPORTANT**: The site includes an optional Theme Customizer that allows clients to preview and customize brand colors in real-time.
+
+**Enable/Disable**: Edit `src/config/themeConfig.js`:
+```javascript
+export const ENABLE_THEME_CUSTOMIZER = true;  // Set to false to hide
+```
+
+**Features**:
+- **Live color customization** for 5 main color sections:
+  - Primary Color (Headers, Navigation)
+  - Accent Color (Buttons, Links)
+  - Secondary Accent Color (Details)
+  - Background Color (Sections)
+  - Neutral Color (Borders, Grays)
+- **4 preset palettes** based on brand colors
+- **Persistent storage** in browser localStorage
+- **Export functionality** to save color configuration as JSON
+- **Bilingual interface** (Spanish/English)
+- **Fully responsive** design
+
+**Usage**:
+1. Set `ENABLE_THEME_CUSTOMIZER = true` during client review sessions
+2. Floating palette button appears in bottom-right corner
+3. Client can customize colors and try different palettes
+4. Export final configuration to JSON
+5. Apply colors permanently to CSS variables in `style.css`
+6. Set `ENABLE_THEME_CUSTOMIZER = false` before production deployment
+
+**Files**:
+- `src/config/themeConfig.js` - Configuration and flag
+- `src/hooks/useThemeCustomizer.js` - Color management logic
+- `src/components/ThemeCustomizer.jsx` - UI component
+- `src/styles/style.css` (lines 3880+) - Customizer styles
+
+See `THEME_CUSTOMIZER.md` for detailed documentation.
 
 ## Visual Brand Identity Guide
 
@@ -256,9 +313,10 @@ Complementing the logo with sans-serif typefaces is crucial because this type of
 - Available in Header hamburger menu and throughout UI
 
 ### External Dependencies
-- Google Fonts (Montserrat, Playfair Display) loaded in `index.html`
-- Font Awesome 6.x loaded from CDN
+- Google Fonts (Poppins, Questrial, Montserrat) loaded via CSS import in `style.css`
+- Font Awesome 6.x loaded from CDN in `index.html`
 - Unsplash images for projects and hero (requires internet connection)
+- Avatar images from pravatar.cc for testimonials
 
 ## Build & Deployment
 

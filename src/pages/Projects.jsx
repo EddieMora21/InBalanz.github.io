@@ -23,7 +23,7 @@ const Projects = () => {
   const horizontalSectionRef = useRef(null);
   const horizontalContainerRef = useRef(null);
 
-  const categories = ['all', 'Residencial', 'Comercial', 'Remodelación'];
+  const categories = ['all', 'Residencial', 'Comercial', 'Remodelación', 'Visualizaciones'];
 
   const filteredProjects = activeFilter === 'all'
     ? projectsData
@@ -219,6 +219,12 @@ const Projects = () => {
             onClick={() => setActiveFilter('Remodelación')}
           >
             {t('projects.filterRemodeling')}
+          </button>
+          <button
+            className={`filter-btn ${activeFilter === 'Visualizaciones' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('Visualizaciones')}
+          >
+            {t('projects.filterVisualizations')}
           </button>
         </div>
       </div>

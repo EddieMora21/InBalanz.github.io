@@ -364,5 +364,127 @@ export const projectsData = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
       'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1760&q=80'
     ]
+  },
+  {
+    id: '7',
+    title: 'Villa Mediterránea',
+    category: 'Anteproyectos',
+    client: 'Proyecto Conceptual',
+    year: '2024',
+    location: 'Costa del Pacífico, Costa Rica',
+    area: '450 m²',
+    duration: 'Proyecto de Visualización',
+    shortDescription: {
+      es: 'Render arquitectónico de villa contemporánea con vistas al océano',
+      en: 'Architectural render of contemporary villa with ocean views'
+    },
+    description: {
+      es: 'Villa Mediterránea es un proyecto conceptual que explora la integración de arquitectura contemporánea con el entorno costero del Pacífico costarricense. Este render 3D muestra una residencia de lujo diseñada para maximizar las vistas al océano mientras mantiene privacidad y confort. El diseño incluye amplias terrazas, piscina infinity y espacios interiores que fluyen hacia el exterior.',
+      en: 'Villa Mediterránea is a conceptual project exploring the integration of contemporary architecture with Costa Rica\'s Pacific coastal environment. This 3D render showcases a luxury residence designed to maximize ocean views while maintaining privacy and comfort. The design includes expansive terraces, infinity pool, and interior spaces that flow seamlessly outdoors.'
+    },
+    features: {
+      es: [
+        'Render fotorrealista 3D',
+        'Diseño conceptual de lujo',
+        'Piscina infinity con vista al océano',
+        'Amplias terrazas y espacios exteriores',
+        'Diseño bioclimático adaptado al clima tropical',
+        'Materiales premium y acabados de lujo',
+        'Integración total con el paisaje',
+        'Iluminación natural optimizada'
+      ],
+      en: [
+        'Photorealistic 3D render',
+        'Luxury conceptual design',
+        'Infinity pool with ocean view',
+        'Expansive terraces and outdoor spaces',
+        'Bioclimatic design adapted to tropical climate',
+        'Premium materials and luxury finishes',
+        'Total landscape integration',
+        'Optimized natural lighting'
+      ]
+    },
+    process: {
+      es: 'Este proyecto de visualización fue desarrollado utilizando software de modelado 3D avanzado y técnicas de renderizado fotorrealista. El objetivo fue crear una representación visual impactante que comunicara el concepto arquitectónico de forma clara y atractiva.',
+      en: 'This visualization project was developed using advanced 3D modeling software and photorealistic rendering techniques. The goal was to create an impactful visual representation that clearly and attractively communicated the architectural concept.'
+    },
+    team: [
+      {
+        name: 'InBalanZ',
+        role: { es: 'Diseño Conceptual', en: 'Conceptual Design' },
+        bio: { es: 'Desarrollo del concepto arquitectónico y dirección creativa.', en: 'Development of architectural concept and creative direction.' }
+      },
+      {
+        name: 'Equipo de Visualización',
+        role: { es: 'Modelado y Renderizado 3D', en: '3D Modeling and Rendering' },
+        bio: { es: 'Creación de modelos 3D y renders fotorrealistas.', en: 'Creation of 3D models and photorealistic renders.' }
+      }
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      'https://images.unsplash.com/photo-1600607687644-c7171b42498f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
+    ]
+  },
+  {
+    id: '8',
+    title: 'Complejo Residencial Urbano',
+    category: 'Anteproyectos',
+    client: 'Proyecto de Desarrollo',
+    year: '2024',
+    location: 'San José, Costa Rica',
+    area: '2,500 m²',
+    duration: 'Proyecto de Visualización',
+    shortDescription: {
+      es: 'Visualización 3D de desarrollo residencial moderno en zona urbana',
+      en: '3D visualization of modern residential development in urban area'
+    },
+    description: {
+      es: 'Complejo Residencial Urbano es una visualización arquitectónica de un proyecto de desarrollo multifamiliar en el corazón de San José. El diseño propone una solución innovadora de vivienda vertical que integra áreas verdes, comercios en planta baja y espacios comunitarios. Los renders muestran la relación del edificio con su contexto urbano y la calidad de los espacios interiores.',
+      en: 'Urban Residential Complex is an architectural visualization of a multifamily development project in the heart of San José. The design proposes an innovative vertical housing solution that integrates green areas, ground-floor retail, and community spaces. The renders show the building\'s relationship with its urban context and the quality of interior spaces.'
+    },
+    features: {
+      es: [
+        'Renders exteriores e interiores',
+        'Visualización del contexto urbano',
+        'Diseño de fachada contemporánea',
+        'Áreas verdes integradas',
+        'Espacios comunitarios',
+        'Comercios en planta baja',
+        'Iluminación y materiales detallados',
+        'Vista de amenidades'
+      ],
+      en: [
+        'Exterior and interior renders',
+        'Urban context visualization',
+        'Contemporary facade design',
+        'Integrated green areas',
+        'Community spaces',
+        'Ground-floor retail',
+        'Detailed lighting and materials',
+        'Amenities view'
+      ]
+    },
+    process: {
+      es: 'El proceso de visualización incluyó el análisis del sitio, desarrollo de múltiples opciones de diseño y la creación de renders desde diferentes ángulos para mostrar la propuesta de manera integral.',
+      en: 'The visualization process included site analysis, development of multiple design options, and creation of renders from different angles to comprehensively showcase the proposal.'
+    },
+    team: [
+      {
+        name: 'InBalanZ',
+        role: { es: 'Arquitecto Conceptual', en: 'Conceptual Architect' },
+        bio: { es: 'Diseño arquitectónico y planificación urbana.', en: 'Architectural design and urban planning.' }
+      },
+      {
+        name: 'Estudio de Renderizado',
+        role: { es: 'Visualización 3D', en: '3D Visualization' },
+        bio: { es: 'Producción de renders fotorrealistas y animaciones.', en: 'Production of photorealistic renders and animations.' }
+      }
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
+    ]
   }
 ];

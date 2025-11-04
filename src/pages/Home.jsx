@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projectsData } from '../data/projectsData';
 import ProjectCard from '../components/ProjectCard';
+import TestimonialsCarousel from '../components/TestimonialsCarousel';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -586,6 +587,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Carousel */}
+      <TestimonialsCarousel />
 
       {/* Philosophy - Enhanced Design */}
       <section className="section philosophy-enhanced" ref={philosophyRef}>
