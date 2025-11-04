@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 
 const DarkModeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
-    // Check localStorage or system preference
+    // Check localStorage, default to light mode
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode !== null) {
       return savedMode === 'true';
     }
-    // Check system preference
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Always default to light mode (day mode)
+    return false;
   });
 
   useEffect(() => {
