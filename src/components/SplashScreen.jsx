@@ -55,7 +55,12 @@ const SplashScreen = ({ onComplete }) => {
       }
     );
 
-    // Step 2: Move logo to header position while continuously shrinking (0.5-1.5s) - 1 second duration
+    // Step 2: Logo stays in center (0.5-1.3s) - 0.8 seconds for user to read
+    timeline.to(logoRef.current, {
+      duration: 0.8
+    });
+
+    // Step 3: Move logo to header position while continuously shrinking (1.3-2.3s) - 1 second duration
     timeline.to(logoRef.current, {
       x: translateX,
       y: translateY,
@@ -64,8 +69,8 @@ const SplashScreen = ({ onComplete }) => {
       ease: 'power2.inOut'
     });
 
-    // Step 3: Slide splash screen up to reveal page (1.1-2s)
-    // Starts at 1.1s (overlapping with logo movement) so you see the logo arriving
+    // Step 4: Slide splash screen up to reveal page (1.9-2.8s)
+    // Starts at 1.9s (overlapping with logo movement) so you see the logo arriving
     timeline.to(splashRef.current, {
       y: '-100%',
       duration: 0.9,
