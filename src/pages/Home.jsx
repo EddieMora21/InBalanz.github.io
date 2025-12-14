@@ -37,25 +37,25 @@ const Home = () => {
   // Hero slider images
   const heroImages = [
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-    'https://www.ied.es/news/26591/image-thumb__26591__scaleByWidth1000/header-articolo-progettazione-sostenibile.jpg',
-    'https://aimaestudio.es/wp-content/uploads/2024/03/salon-minimalista-diseno-de-interiores.jpg',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'
+    '/images/hero/arbol1.webp',
+    '/images/projects/casa-sanchez-barrantes/imagensecuendaria.webp',
+    '/images/hero/arbol2.webp'
   ];
 
   // Rotating text with colors
   const rotatingTexts = currentLang === 'es'
     ? [
-        { text: 'Enfoque Natural', color: '#2e8b57' },
-        { text: 'Diseño Sostenible', color: '#d4af37' },
-        { text: 'Espacios Armoniosos', color: '#4a90e2' },
-        { text: 'Arquitectura Consciente', color: '#e67e22' }
-      ]
+      { text: 'Enfoque Natural', color: '#2e8b57' },
+      { text: 'Diseño Sostenible', color: '#d4af37' },
+      { text: 'Espacios Armoniosos', color: '#4a90e2' },
+      { text: 'Arquitectura Consciente', color: '#e67e22' }
+    ]
     : [
-        { text: 'Natural Focus', color: '#2e8b57' },
-        { text: 'Sustainable Design', color: '#d4af37' },
-        { text: 'Harmonious Spaces', color: '#4a90e2' },
-        { text: 'Conscious Architecture', color: '#e67e22' }
-      ];
+      { text: 'Natural Focus', color: '#2e8b57' },
+      { text: 'Sustainable Design', color: '#d4af37' },
+      { text: 'Harmonious Spaces', color: '#4a90e2' },
+      { text: 'Conscious Architecture', color: '#e67e22' }
+    ];
 
   // Slider effect with text animation
   useEffect(() => {
@@ -91,16 +91,16 @@ const Home = () => {
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
     )
-    .fromTo(heroSubtitleRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-      '-=0.7'
-    )
-    .fromTo(heroButtonsRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-      '-=0.7'
-    );
+      .fromTo(heroSubtitleRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+        '-=0.7'
+      )
+      .fromTo(heroButtonsRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+        '-=0.7'
+      );
 
     // Projects section animation - Stacked Cards Timeline
     const projectsTimeline = gsap.timeline({
@@ -271,7 +271,7 @@ const Home = () => {
             value: finalValue,
             duration: 2,
             ease: 'power1.out',
-            onUpdate: function() {
+            onUpdate: function () {
               element.textContent = Math.floor(counter.value) + '+';
             }
           });
@@ -743,37 +743,39 @@ const Home = () => {
       </section>
 
       {/* Contact Preview */}
-      <section className="section contact" ref={contactRef}>
+      <section className="section home-cta" ref={contactRef}>
         <div className="container">
-          <div className="section-title">
-            <h2>{t('contact.title')}</h2>
-            <p>{t('contact.subtitle')}</p>
-          </div>
-          <div className="contact-content">
-            <div className="contact-info">
-              <h3>{t('contact.info')}</h3>
-              <p><i className="fas fa-map-marker-alt"></i> San José, Costa Rica</p>
-              <p><i className="fas fa-phone"></i> +506 1234-5678</p>
-              <p><i className="fas fa-envelope"></i> info@gsarquitecto.com</p>
-              <div style={{ marginTop: '25px' }}>
-                <a
-                  href="https://wa.me/50612345678?text=Hola,%20estoy%20interesado%20en%20sus%20servicios%20de%20arquitectura."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-whatsapp"
-                >
-                  <i className="fab fa-whatsapp"></i>
-                  <span>{currentLang === 'es' ? 'Chat por WhatsApp' : 'Chat on WhatsApp'}</span>
-                </a>
-              </div>
+          <div className="home-cta-card">
+            <div className="section-title">
+              <h2>{t('contact.title')}</h2>
+              <p>{t('contact.subtitle')}</p>
             </div>
-            <form className="contact-form">
-              <input type="text" placeholder={t('contact.name')} required />
-              <input type="email" placeholder={t('contact.email')} required />
-              <input type="text" placeholder={t('contact.subject')} required />
-              <textarea placeholder={t('contact.message')} required></textarea>
-              <button type="submit" className="btn">{t('contact.send')}</button>
-            </form>
+            <div className="contact-content">
+              <div className="contact-info">
+                <h3>{t('contact.info')}</h3>
+                <p><i className="fas fa-map-marker-alt"></i> San José, Costa Rica</p>
+                <p><i className="fas fa-phone"></i> +506 1234-5678</p>
+                <p><i className="fas fa-envelope"></i> info@gsarquitecto.com</p>
+                <div style={{ marginTop: '25px' }}>
+                  <a
+                    href="https://wa.me/50612345678?text=Hola,%20estoy%20interesado%20en%20sus%20servicios%20de%20arquitectura."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-whatsapp"
+                  >
+                    <i className="fab fa-whatsapp"></i>
+                    <span>{currentLang === 'es' ? 'Chat por WhatsApp' : 'Chat on WhatsApp'}</span>
+                  </a>
+                </div>
+              </div>
+              <form className="contact-form">
+                <input type="text" placeholder={t('contact.name')} required />
+                <input type="email" placeholder={t('contact.email')} required />
+                <input type="text" placeholder={t('contact.subject')} required />
+                <textarea placeholder={t('contact.message')} required></textarea>
+                <button type="submit" className="btn">{t('contact.send')}</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

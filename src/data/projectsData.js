@@ -1,490 +1,257 @@
 export const projectsData = [
   {
     id: '1',
-    title: 'Casa Natura',
+    title: 'Casa Sánchez Barrantes',
     category: 'Residencial',
-    client: 'Familia Rodríguez',
-    year: '2023',
-    location: 'Heredia, Costa Rica',
-    area: '280 m²',
-    duration: '8 meses',
+    client: 'Familia Sánchez Barrantes',
+    year: '2024',
+    location: 'Costa Rica',
+    area: '350 m²',
+    duration: '14 meses',
+    featured: true,
     shortDescription: {
-      es: 'Diseño residencial integrado con el entorno',
-      en: 'Residential design integrated with the environment'
+      es: 'Proyecto estrella: Residencia contemporánea de lujo',
+      en: 'Star project: Luxury contemporary residence'
     },
     description: {
-      es: 'La Casa Natura es un proyecto residencial diseñado para integrarse perfectamente con el entorno natural del Valle Central de Costa Rica. Ubicada en una parcela con pendiente natural, la casa aprovecha la topografía para crear niveles escalonados que maximizan las vistas y la privacidad.',
-      en: 'Casa Natura is a residential project designed to integrate perfectly with the natural environment of Costa Rica\'s Central Valley. Located on a naturally sloped plot, the house takes advantage of the topography to create staggered levels that maximize views and privacy.'
+      es: 'Casa Sánchez Barrantes es nuestro proyecto estrella, una residencia contemporánea que representa la excelencia en diseño arquitectónico. Con una perfecta fusión de espacios interiores y exteriores, esta casa destaca por sus líneas modernas, acabados de lujo y una integración impecable con el entorno. Cada detalle fue cuidadosamente diseñado para crear un hogar que combina funcionalidad, estética y confort.',
+      en: 'Casa Sánchez Barrantes is our star project, a contemporary residence that represents excellence in architectural design. With a perfect fusion of indoor and outdoor spaces, this house stands out for its modern lines, luxury finishes, and impeccable integration with the environment. Every detail was carefully designed to create a home that combines functionality, aesthetics, and comfort.'
     },
     features: {
       es: [
-        'Integración total con el entorno natural',
-        'Orientación solar optimizada',
-        'Sistema de recolección de agua pluvial',
-        'Materiales locales y sostenibles',
-        'Ventilación cruzada natural',
-        'Espacios interiores-exteriores fluidos',
-        'Terraza con vistas panorámicas',
-        'Diseño bioclimático'
+        'Diseño arquitectónico de vanguardia',
+        'Fachada contemporánea con iluminación nocturna',
+        'Escaleras escultóricas como elemento central',
+        'Habitación principal con diseño premium',
+        'Baños con acabados de lujo',
+        'Espacios interiores amplios y luminosos',
+        'Integración perfecta interior-exterior',
+        'Materiales de primera calidad',
+        'Iluminación arquitectónica profesional',
+        'Diseño paisajístico integrado'
       ],
       en: [
-        'Total integration with natural environment',
-        'Optimized solar orientation',
-        'Rainwater harvesting system',
-        'Local and sustainable materials',
-        'Natural cross ventilation',
-        'Fluid indoor-outdoor spaces',
-        'Terrace with panoramic views',
-        'Bioclimatic design'
+        'Avant-garde architectural design',
+        'Contemporary facade with night lighting',
+        'Sculptural stairs as central element',
+        'Master bedroom with premium design',
+        'Bathrooms with luxury finishes',
+        'Spacious and bright interior spaces',
+        'Perfect indoor-outdoor integration',
+        'Premium quality materials',
+        'Professional architectural lighting',
+        'Integrated landscape design'
       ]
     },
     process: {
-      es: 'El proyecto comenzó con un análisis exhaustivo del terreno y las condiciones climáticas locales. Se realizaron múltiples estudios de soleamiento y ventilación antes de definir la orientación óptima.',
-      en: 'The project began with a thorough analysis of the terrain and local climate conditions. Multiple sun and ventilation studies were conducted before defining the optimal orientation.'
+      es: 'Este proyecto representa la culminación de un proceso de diseño colaborativo intensivo, donde cada espacio fue concebido para reflejar el estilo de vida y las aspiraciones de la familia. Se priorizó la calidad en cada etapa, desde el concepto inicial hasta los acabados finales.',
+      en: 'This project represents the culmination of an intensive collaborative design process, where each space was conceived to reflect the family\'s lifestyle and aspirations. Quality was prioritized at every stage, from initial concept to final finishes.'
+    },
+    team: [
+      {
+        name: 'InBalanZ',
+        role: { es: 'Arquitecto Director', en: 'Lead Architect' },
+        bio: { es: 'Diseño conceptual, dirección creativa y supervisión integral del proyecto.', en: 'Conceptual design, creative direction, and comprehensive project supervision.' }
+      }
+    ],
+    images: [
+      '/images/projects/casa-sanchez-barrantes/imagenprincipal.webp',
+      '/images/projects/casa-sanchez-barrantes/imagensecuendaria.webp',
+      '/images/projects/casa-sanchez-barrantes/facadaexteriordia.webp',
+      '/images/projects/casa-sanchez-barrantes/fachadaexteriordia2.webp',
+      '/images/projects/casa-sanchez-barrantes/fachadaexteriornoche.webp',
+      '/images/projects/casa-sanchez-barrantes/fachadaexteriornoche2.webp',
+      '/images/projects/casa-sanchez-barrantes/escaleras.webp',
+      '/images/projects/casa-sanchez-barrantes/escaleras2.webp',
+      '/images/projects/casa-sanchez-barrantes/habitacionprincipal.webp',
+      '/images/projects/casa-sanchez-barrantes/habitacion1.webp',
+      '/images/projects/casa-sanchez-barrantes/habitacion2.webp',
+      '/images/projects/casa-sanchez-barrantes/bano.webp'
+    ]
+  },
+  {
+    id: '2',
+    title: 'Cabaña Cedrales',
+    category: 'Residencial',
+    client: 'Proyecto Privado',
+    year: '2024',
+    location: 'Costa Rica',
+    area: '150 m²',
+    duration: '6 meses',
+    shortDescription: {
+      es: 'Cabaña rústica con diseño contemporáneo',
+      en: 'Rustic cabin with contemporary design'
+    },
+    description: {
+      es: 'La Cabaña Cedrales es un proyecto residencial que combina la calidez de los materiales naturales con líneas arquitectónicas modernas. Diseñada para integrarse perfectamente con el entorno boscoso, esta cabaña ofrece un refugio acogedor con todos los elementos de confort contemporáneo.',
+      en: 'Cabaña Cedrales is a residential project that combines the warmth of natural materials with modern architectural lines. Designed to integrate perfectly with the forested environment, this cabin offers a cozy retreat with all contemporary comfort elements.'
+    },
+    features: {
+      es: [
+        'Diseño integrado con el entorno natural',
+        'Materiales locales y sostenibles',
+        'Espacios abiertos y luminosos',
+        'Ventilación natural optimizada',
+        'Acabados de madera premium',
+        'Terrazas con vistas al bosque'
+      ],
+      en: [
+        'Design integrated with natural environment',
+        'Local and sustainable materials',
+        'Open and bright spaces',
+        'Optimized natural ventilation',
+        'Premium wood finishes',
+        'Terraces with forest views'
+      ]
+    },
+    process: {
+      es: 'El proyecto se desarrolló con un enfoque en la sostenibilidad y el respeto al entorno natural, utilizando técnicas constructivas que minimizan el impacto ambiental.',
+      en: 'The project was developed with a focus on sustainability and respect for the natural environment, using construction techniques that minimize environmental impact.'
     },
     team: [
       {
         name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Responsable del diseño conceptual y dirección general del proyecto.', en: 'Responsible for conceptual design and overall project direction.' }
-      },
-      {
-        name: 'María Fernández',
-        role: { es: 'Arquitecta Proyectista', en: 'Project Architect' },
-        bio: { es: 'Desarrollo de planos constructivos y coordinación técnica.', en: 'Development of construction plans and technical coordination.' }
       }
     ],
     images: [
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
-      'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1760&q=80',
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
+      '/images/projects/cabana-cedrales/DSC_0178.webp',
+      '/images/projects/cabana-cedrales/DSC_0200.webp',
+      '/images/projects/cabana-cedrales/DSC_0221.webp',
+      '/images/projects/cabana-cedrales/DSC_0231.webp',
+      '/images/projects/cabana-cedrales/DSC_0234.webp',
+      '/images/projects/cabana-cedrales/DSC_0281.webp',
+      '/images/projects/cabana-cedrales/DSC_0298.webp',
+      '/images/projects/cabana-cedrales/DSC_0315.webp'
     ]
   },
   {
-    id: '2',
-    title: 'Vista al Valle',
+    id: '3',
+    title: 'Residencia Barva',
     category: 'Residencial',
-    client: 'Sr. y Sra. Martínez',
-    year: '2022',
-    location: 'San José, Costa Rica',
-    area: '350 m²',
+    client: 'Proyecto Privado',
+    year: '2024',
+    location: 'Barva, Heredia, Costa Rica',
+    area: '280 m²',
     duration: '10 meses',
     shortDescription: {
-      es: 'Arquitectura contemporánea con vistas panorámicas',
-      en: 'Contemporary architecture with panoramic views'
+      es: 'Residencia moderna en las faldas del volcán',
+      en: 'Modern residence on the volcano slopes'
     },
     description: {
-      es: 'Vista al Valle es una residencia contemporánea que aprovecha al máximo las vistas panorámicas del Valle Central. El diseño se caracteriza por sus grandes ventanales y terrazas integradas.',
-      en: 'Vista al Valle is a contemporary residence that maximizes the panoramic views of the Central Valley. The design is characterized by its large windows and integrated terraces.'
+      es: 'Residencia Barva es un proyecto residencial contemporáneo ubicado en las faldas del Volcán Barva. El diseño aprovecha las condiciones climáticas únicas de la zona para crear espacios confortables con excelente iluminación natural y vistas panorámicas del valle central.',
+      en: 'Residencia Barva is a contemporary residential project located on the slopes of Barva Volcano. The design takes advantage of the area\'s unique climate conditions to create comfortable spaces with excellent natural lighting and panoramic views of the central valley.'
     },
     features: {
       es: [
-        'Vistas panorámicas del valle',
-        'Terraza infinity con piscina',
-        'Sistema de paneles solares',
-        'Domótica integrada',
-        'Acabados de lujo',
-        'Diseño minimalista',
-        'Iluminación LED eficiente',
-        'Jardín vertical interior'
+        'Vistas panorámicas del valle central',
+        'Diseño bioclimático',
+        'Amplios ventanales',
+        'Espacios interiores-exteriores fluidos',
+        'Materiales de alta calidad',
+        'Jardines integrados',
+        'Sistema de iluminación natural',
+        'Terrazas en múltiples niveles'
       ],
       en: [
-        'Panoramic valley views',
-        'Infinity terrace with pool',
-        'Solar panel system',
-        'Integrated home automation',
-        'Luxury finishes',
-        'Minimalist design',
-        'Efficient LED lighting',
-        'Interior vertical garden'
+        'Panoramic views of the central valley',
+        'Bioclimatic design',
+        'Large windows',
+        'Fluid indoor-outdoor spaces',
+        'High quality materials',
+        'Integrated gardens',
+        'Natural lighting system',
+        'Multi-level terraces'
       ]
     },
     process: {
-      es: 'El principal reto fue diseñar una estructura que resistiera los vientos característicos de la zona mientras mantenía la elegancia visual.',
-      en: 'The main challenge was designing a structure that would withstand the characteristic winds of the area while maintaining visual elegance.'
+      es: 'El proyecto comenzó con un análisis detallado del terreno y las condiciones climáticas para optimizar la orientación y el diseño bioclimático de la vivienda.',
+      en: 'The project began with a detailed analysis of the terrain and climatic conditions to optimize the orientation and bioclimatic design of the home.'
     },
     team: [
       {
         name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
         bio: { es: 'Diseño conceptual y coordinación general del proyecto.', en: 'Conceptual design and overall project coordination.' }
-      },
-      {
-        name: 'Ana Rodríguez',
-        role: { es: 'Diseñadora de Interiores', en: 'Interior Designer' },
-        bio: { es: 'Diseño de espacios interiores y selección de mobiliario.', en: 'Interior space design and furniture selection.' }
       }
     ],
     images: [
-      'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1760&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
-    ]
-  },
-  {
-    id: '3',
-    title: 'Renovación Urbana',
-    category: 'Remodelación',
-    client: 'Familia González',
-    year: '2023',
-    location: 'Alajuela, Costa Rica',
-    area: '180 m²',
-    duration: '6 meses',
-    shortDescription: {
-      es: 'Remodelación completa con enfoque sostenible',
-      en: 'Complete renovation with sustainable approach'
-    },
-    description: {
-      es: 'Este proyecto transformó completamente una vivienda urbana de los años 80, modernizando todos sus espacios mientras se preservaba la estructura original.',
-      en: 'This project completely transformed an urban house from the 1980s, modernizing all its spaces while preserving the original structure.'
-    },
-    features: {
-      es: [
-        'Preservación de estructura original',
-        'Distribución espacial optimizada',
-        'Sistema de aislamiento térmico',
-        'Instalaciones eléctricas modernas',
-        'Ventanas de alta eficiencia',
-        'Diseño interior contemporáneo',
-        'Iluminación LED inteligente',
-        'Espacios multifuncionales'
-      ],
-      en: [
-        'Preservation of original structure',
-        'Optimized spatial distribution',
-        'Thermal insulation system',
-        'Modern electrical installations',
-        'High efficiency windows',
-        'Contemporary interior design',
-        'Smart LED lighting',
-        'Multifunctional spaces'
-      ]
-    },
-    process: {
-      es: 'El mayor desafío fue trabajar dentro de las limitaciones de la estructura existente mientras se implementaban las mejoras deseadas.',
-      en: 'The biggest challenge was working within the limitations of the existing structure while implementing the desired improvements.'
-    },
-    team: [
-      {
-        name: 'InBalanZ',
-        role: { es: 'Arquitecto Director', en: 'Lead Architect' },
-        bio: { es: 'Dirección del proyecto y diseño de la remodelación.', en: 'Project direction and renovation design.' }
-      },
-      {
-        name: 'Laura Vargas',
-        role: { es: 'Arquitecta', en: 'Architect' },
-        bio: { es: 'Coordinación en obra y supervisión de ejecución.', en: 'Site coordination and execution supervision.' }
-      }
-    ],
-    images: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
-      'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1760&q=80'
+      '/images/projects/residencia-barva/1.webp',
+      '/images/projects/residencia-barva/2.webp',
+      '/images/projects/residencia-barva/3.webp',
+      '/images/projects/residencia-barva/4.webp',
+      '/images/projects/residencia-barva/5.webp',
+      '/images/projects/residencia-barva/6.webp',
+      '/images/projects/residencia-barva/7.webp',
+      '/images/projects/residencia-barva/8.webp'
     ]
   },
   {
     id: '4',
-    title: 'Casa del Bosque',
+    title: 'Residencia Corteza',
     category: 'Residencial',
-    client: 'Dr. Eduardo Silva',
-    year: '2022',
-    location: 'Cartago, Costa Rica',
+    client: 'Proyecto Privado',
+    year: '2024',
+    location: 'Costa Rica',
     area: '320 m²',
     duration: '12 meses',
     shortDescription: {
-      es: 'Arquitectura sostenible en armonía con la naturaleza',
-      en: 'Sustainable architecture in harmony with nature'
+      es: 'Arquitectura contemporánea con acabados premium',
+      en: 'Contemporary architecture with premium finishes'
     },
     description: {
-      es: 'Ubicada en una zona boscosa protegida, esta casa fue diseñada con el máximo respeto al entorno natural.',
-      en: 'Located in a protected forest area, this house was designed with maximum respect for the natural environment.'
+      es: 'Residencia Corteza representa la excelencia en diseño residencial contemporáneo. Con énfasis en líneas limpias, materiales de primera calidad y espacios funcionales, esta residencia ofrece un estilo de vida moderno sin sacrificar la calidez del hogar.',
+      en: 'Residencia Corteza represents excellence in contemporary residential design. With emphasis on clean lines, premium materials, and functional spaces, this residence offers a modern lifestyle without sacrificing the warmth of home.'
     },
     features: {
       es: [
-        'Ubicación en área protegida',
-        'Construcción de bajo impacto',
-        'Materiales naturales y locales',
-        'Sistema de tratamiento de aguas',
-        'Energía 100% solar',
-        'Integración con vegetación existente',
-        'Diseño camuflado en el bosque',
-        'Tecnología off-grid'
-      ],
-      en: [
-        'Location in protected area',
-        'Low-impact construction',
-        'Natural and local materials',
-        'Water treatment system',
-        '100% solar energy',
-        'Integration with existing vegetation',
-        'Forest-camouflaged design',
-        'Off-grid technology'
-      ]
-    },
-    process: {
-      es: 'El proyecto requirió una aprobación ambiental especial y un estudio de impacto detallado.',
-      en: 'The project required special environmental approval and a detailed impact study.'
-    },
-    team: [
-      {
-        name: 'InBalanZ',
-        role: { es: 'Arquitecto Director', en: 'Lead Architect' },
-        bio: { es: 'Diseño conceptual y gestión de permisos ambientales.', en: 'Conceptual design and environmental permits management.' }
-      },
-      {
-        name: 'Roberto Mendoza',
-        role: { es: 'Especialista en Sostenibilidad', en: 'Sustainability Specialist' },
-        bio: { es: 'Asesoría en sistemas sostenibles y impacto ambiental.', en: 'Advisory on sustainable systems and environmental impact.' }
-      }
-    ],
-    images: [
-      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
-      'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1760&q=80'
-    ]
-  },
-  {
-    id: '5',
-    title: 'Oficinas Verdes',
-    category: 'Comercial',
-    client: 'EcoTech Solutions',
-    year: '2023',
-    location: 'San José, Costa Rica',
-    area: '650 m²',
-    duration: '14 meses',
-    shortDescription: {
-      es: 'Espacios corporativos con certificación LEED',
-      en: 'Corporate spaces with LEED certification'
-    },
-    description: {
-      es: 'Edificio de oficinas corporativas diseñado para obtener la certificación LEED Gold.',
-      en: 'Corporate office building designed to achieve LEED Gold certification.'
-    },
-    features: {
-      es: [
-        'Certificación LEED Gold',
-        'Techos verdes extensivos',
-        'Sistema de recolección pluvial',
-        'Fachada ventilada inteligente',
+        'Diseño arquitectónico contemporáneo',
+        'Acabados de lujo',
+        'Espacios amplios y funcionales',
         'Iluminación natural optimizada',
-        'Sistema HVAC de alta eficiencia',
-        'Materiales con certificación verde',
-        'Espacios colaborativos flexibles'
+        'Materiales premium',
+        'Integración de tecnología',
+        'Áreas sociales abiertas',
+        'Jardines paisajísticos',
+        'Piscina integrada',
+        'Terrazas de estar'
       ],
       en: [
-        'LEED Gold certification',
-        'Extensive green roofs',
-        'Rainwater harvesting system',
-        'Intelligent ventilated facade',
+        'Contemporary architectural design',
+        'Luxury finishes',
+        'Spacious and functional areas',
         'Optimized natural lighting',
-        'High efficiency HVAC system',
-        'Green-certified materials',
-        'Flexible collaborative spaces'
+        'Premium materials',
+        'Technology integration',
+        'Open social areas',
+        'Landscaped gardens',
+        'Integrated pool',
+        'Living terraces'
       ]
     },
     process: {
-      es: 'El proyecto requirió una coordinación multidisciplinaria intensiva con especialistas en sostenibilidad.',
-      en: 'The project required intensive multidisciplinary coordination with sustainability specialists.'
+      es: 'El diseño se desarrolló en estrecha colaboración con los propietarios para crear espacios que reflejen su estilo de vida y necesidades específicas.',
+      en: 'The design was developed in close collaboration with the owners to create spaces that reflect their lifestyle and specific needs.'
     },
     team: [
       {
         name: 'InBalanZ',
         role: { es: 'Arquitecto Director', en: 'Lead Architect' },
-        bio: { es: 'Diseño arquitectónico y coordinación LEED.', en: 'Architectural design and LEED coordination.' }
-      },
-      {
-        name: 'Ana Rodríguez',
-        role: { es: 'Diseñadora de Interiores', en: 'Interior Designer' },
-        bio: { es: 'Diseño de espacios de trabajo y áreas comunes.', en: 'Workplace design and common areas.' }
+        bio: { es: 'Dirección del proyecto y diseño arquitectónico.', en: 'Project direction and architectural design.' }
       }
     ],
     images: [
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
-    ]
-  },
-  {
-    id: '6',
-    title: 'Loft Moderno',
-    category: 'Remodelación',
-    client: 'Sra. Laura Chen',
-    year: '2022',
-    location: 'Escazú, Costa Rica',
-    area: '120 m²',
-    duration: '4 meses',
-    shortDescription: {
-      es: 'Transformación industrial contemporánea',
-      en: 'Contemporary industrial transformation'
-    },
-    description: {
-      es: 'Transformación de un antiguo local comercial en un loft residencial de estilo industrial contemporáneo.',
-      en: 'Transformation of an old commercial premises into a residential loft with a contemporary industrial style.'
-    },
-    features: {
-      es: [
-        'Estilo industrial contemporáneo',
-        'Espacio abierto multifuncional',
-        'Estructura metálica aparente',
-        'Ladrillos a la vista preservados',
-        'Sistema de iluminación flexible',
-        'Mobiliario integrado',
-        'Acabados industriales premium',
-        'Techos altos originales'
-      ],
-      en: [
-        'Contemporary industrial style',
-        'Multifunctional open space',
-        'Exposed metal structure',
-        'Preserved exposed bricks',
-        'Flexible lighting system',
-        'Integrated furniture',
-        'Premium industrial finishes',
-        'Original high ceilings'
-      ]
-    },
-    process: {
-      es: 'El principal desafío fue adaptar un espacio comercial a uso residencial manteniendo el carácter industrial.',
-      en: 'The main challenge was adapting a commercial space for residential use while maintaining the industrial character.'
-    },
-    team: [
-      {
-        name: 'InBalanZ',
-        role: { es: 'Arquitecto Director', en: 'Lead Architect' },
-        bio: { es: 'Diseño conceptual y dirección de la remodelación.', en: 'Conceptual design and renovation direction.' }
-      },
-      {
-        name: 'Laura Vargas',
-        role: { es: 'Arquitecta', en: 'Architect' },
-        bio: { es: 'Desarrollo técnico y supervisión de obra.', en: 'Technical development and site supervision.' }
-      }
-    ],
-    images: [
-      'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1758&q=80',
-      'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1760&q=80'
-    ]
-  },
-  {
-    id: '7',
-    title: 'Villa Mediterránea',
-    category: 'Anteproyectos',
-    client: 'Proyecto Conceptual',
-    year: '2024',
-    location: 'Costa del Pacífico, Costa Rica',
-    area: '450 m²',
-    duration: 'Proyecto de Visualización',
-    shortDescription: {
-      es: 'Render arquitectónico de villa contemporánea con vistas al océano',
-      en: 'Architectural render of contemporary villa with ocean views'
-    },
-    description: {
-      es: 'Villa Mediterránea es un proyecto conceptual que explora la integración de arquitectura contemporánea con el entorno costero del Pacífico costarricense. Este render 3D muestra una residencia de lujo diseñada para maximizar las vistas al océano mientras mantiene privacidad y confort. El diseño incluye amplias terrazas, piscina infinity y espacios interiores que fluyen hacia el exterior.',
-      en: 'Villa Mediterránea is a conceptual project exploring the integration of contemporary architecture with Costa Rica\'s Pacific coastal environment. This 3D render showcases a luxury residence designed to maximize ocean views while maintaining privacy and comfort. The design includes expansive terraces, infinity pool, and interior spaces that flow seamlessly outdoors.'
-    },
-    features: {
-      es: [
-        'Render fotorrealista 3D',
-        'Diseño conceptual de lujo',
-        'Piscina infinity con vista al océano',
-        'Amplias terrazas y espacios exteriores',
-        'Diseño bioclimático adaptado al clima tropical',
-        'Materiales premium y acabados de lujo',
-        'Integración total con el paisaje',
-        'Iluminación natural optimizada'
-      ],
-      en: [
-        'Photorealistic 3D render',
-        'Luxury conceptual design',
-        'Infinity pool with ocean view',
-        'Expansive terraces and outdoor spaces',
-        'Bioclimatic design adapted to tropical climate',
-        'Premium materials and luxury finishes',
-        'Total landscape integration',
-        'Optimized natural lighting'
-      ]
-    },
-    process: {
-      es: 'Este proyecto de visualización fue desarrollado utilizando software de modelado 3D avanzado y técnicas de renderizado fotorrealista. El objetivo fue crear una representación visual impactante que comunicara el concepto arquitectónico de forma clara y atractiva.',
-      en: 'This visualization project was developed using advanced 3D modeling software and photorealistic rendering techniques. The goal was to create an impactful visual representation that clearly and attractively communicated the architectural concept.'
-    },
-    team: [
-      {
-        name: 'InBalanZ',
-        role: { es: 'Diseño Conceptual', en: 'Conceptual Design' },
-        bio: { es: 'Desarrollo del concepto arquitectónico y dirección creativa.', en: 'Development of architectural concept and creative direction.' }
-      },
-      {
-        name: 'Equipo de Visualización',
-        role: { es: 'Modelado y Renderizado 3D', en: '3D Modeling and Rendering' },
-        bio: { es: 'Creación de modelos 3D y renders fotorrealistas.', en: 'Creation of 3D models and photorealistic renders.' }
-      }
-    ],
-    images: [
-      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1600607687644-c7171b42498f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
-    ]
-  },
-  {
-    id: '8',
-    title: 'Complejo Residencial Urbano',
-    category: 'Anteproyectos',
-    client: 'Proyecto de Desarrollo',
-    year: '2024',
-    location: 'San José, Costa Rica',
-    area: '2,500 m²',
-    duration: 'Proyecto de Visualización',
-    shortDescription: {
-      es: 'Visualización 3D de desarrollo residencial moderno en zona urbana',
-      en: '3D visualization of modern residential development in urban area'
-    },
-    description: {
-      es: 'Complejo Residencial Urbano es una visualización arquitectónica de un proyecto de desarrollo multifamiliar en el corazón de San José. El diseño propone una solución innovadora de vivienda vertical que integra áreas verdes, comercios en planta baja y espacios comunitarios. Los renders muestran la relación del edificio con su contexto urbano y la calidad de los espacios interiores.',
-      en: 'Urban Residential Complex is an architectural visualization of a multifamily development project in the heart of San José. The design proposes an innovative vertical housing solution that integrates green areas, ground-floor retail, and community spaces. The renders show the building\'s relationship with its urban context and the quality of interior spaces.'
-    },
-    features: {
-      es: [
-        'Renders exteriores e interiores',
-        'Visualización del contexto urbano',
-        'Diseño de fachada contemporánea',
-        'Áreas verdes integradas',
-        'Espacios comunitarios',
-        'Comercios en planta baja',
-        'Iluminación y materiales detallados',
-        'Vista de amenidades'
-      ],
-      en: [
-        'Exterior and interior renders',
-        'Urban context visualization',
-        'Contemporary facade design',
-        'Integrated green areas',
-        'Community spaces',
-        'Ground-floor retail',
-        'Detailed lighting and materials',
-        'Amenities view'
-      ]
-    },
-    process: {
-      es: 'El proceso de visualización incluyó el análisis del sitio, desarrollo de múltiples opciones de diseño y la creación de renders desde diferentes ángulos para mostrar la propuesta de manera integral.',
-      en: 'The visualization process included site analysis, development of multiple design options, and creation of renders from different angles to comprehensively showcase the proposal.'
-    },
-    team: [
-      {
-        name: 'InBalanZ',
-        role: { es: 'Arquitecto Conceptual', en: 'Conceptual Architect' },
-        bio: { es: 'Diseño arquitectónico y planificación urbana.', en: 'Architectural design and urban planning.' }
-      },
-      {
-        name: 'Estudio de Renderizado',
-        role: { es: 'Visualización 3D', en: '3D Visualization' },
-        bio: { es: 'Producción de renders fotorrealistas y animaciones.', en: 'Production of photorealistic renders and animations.' }
-      }
-    ],
-    images: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80'
+      '/images/projects/residencia-corteza/1.webp',
+      '/images/projects/residencia-corteza/2.webp',
+      '/images/projects/residencia-corteza/3.webp',
+      '/images/projects/residencia-corteza/4.webp',
+      '/images/projects/residencia-corteza/5.webp',
+      '/images/projects/residencia-corteza/6.webp',
+      '/images/projects/residencia-corteza/7.webp',
+      '/images/projects/residencia-corteza/8.webp',
+      '/images/projects/residencia-corteza/9.webp',
+      '/images/projects/residencia-corteza/10.webp'
     ]
   }
 ];

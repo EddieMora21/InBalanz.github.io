@@ -51,6 +51,16 @@ const Header = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/renders" className={isActive('/renders')} onClick={closeMenu}>
+                  {t('nav.renders')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className={isActive('/blog')} onClick={closeMenu}>
+                  {t('nav.blog')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className={isActive('/about')} onClick={closeMenu}>
                   {t('nav.about')}
                 </Link>

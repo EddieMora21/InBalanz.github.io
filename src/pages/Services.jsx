@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
@@ -7,191 +7,154 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.language;
-  const [typewriterText, setTypewriterText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
+  const { t } = useTranslation();
 
   // Refs para animaciones
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const service1Ref = useRef(null);
-  const service2Ref = useRef(null);
-  const service3Ref = useRef(null);
-  const processTitleRef = useRef(null);
-  const processStepsRef = useRef(null);
+  const heroRef = useRef(null);
+  const serviceIndexRef = useRef(null);
+  const scopeSectionRef = useRef(null);
+  const whyBiosRef = useRef(null);
   const ctaRef = useRef(null);
-
-  // Efecto de máquina de escribir para el subtítulo
-  useEffect(() => {
-    const fullText = t('services.subtitle');
-    let currentIndex = 0;
-
-    const typeInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setTypewriterText(fullText.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(typeInterval);
-      }
-    }, 50);
-
-    return () => clearInterval(typeInterval);
-  }, [t, currentLang]);
-
-  // Cursor parpadeante
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-
-    return () => clearInterval(cursorInterval);
-  }, []);
 
   // Animaciones GSAP
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.2 });
+    // Parallax Hero
+    if (heroRef.current) {
+      const tl = gsap.timeline({ delay: 0.2 });
+      tl.fromTo(
+        heroRef.current.querySelector('h1'),
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' }
+      ).fromTo(
+        heroRef.current.querySelector('p'),
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+        '-=0.8'
+      );
 
-    // Animación del título principal
-    tl.fromTo(titleRef.current,
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
-    )
-    .fromTo(subtitleRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5, ease: 'power3.out' },
-      '-=0.3'
-    );
+      gsap.to(heroRef.current.querySelector('.container'), {
+        y: 50,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
 
-    // Animaciones de servicios
-    const services = [service1Ref, service2Ref, service3Ref];
-    services.forEach((serviceRef, index) => {
-      if (serviceRef.current) {
-        const textContent = serviceRef.current.querySelector('.about-text');
-        const imageContent = serviceRef.current.querySelector('.about-image');
-
-        gsap.fromTo(textContent,
-          { x: index % 2 === 0 ? -50 : 50, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: serviceRef.current,
-              start: 'top 75%',
-              once: true
-            }
+    // Animación de las tarjetas de servicio del índice
+    if (serviceIndexRef.current) {
+      const cards = serviceIndexRef.current.querySelectorAll('.service-index-card');
+      gsap.fromTo(
+        cards,
+        { y: 100, opacity: 0, rotationX: 15 },
+        {
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: serviceIndexRef.current,
+            start: 'top 80%',
+            end: 'bottom 80%',
+            toggleActions: 'play none none reverse'
           }
-        );
+        }
+      );
+    }
 
-        gsap.fromTo(imageContent,
-          { x: index % 2 === 0 ? 50 : -50, opacity: 0, scale: 0.95 },
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: serviceRef.current,
-              start: 'top 75%',
-              once: true
-            }
+    // Animación de las tarjetas alternadas
+    if (scopeSectionRef.current) {
+      const cards = scopeSectionRef.current.querySelectorAll('.service-card');
+      gsap.fromTo(
+        cards,
+        { y: 80, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: scopeSectionRef.current,
+            start: 'top 75%',
           }
-        );
+        }
+      );
+    }
 
-        // Animación de los items de la lista
-        const listItems = textContent.querySelectorAll('li');
-        gsap.fromTo(listItems,
-          { x: -20, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: serviceRef.current,
-              start: 'top 70%',
-              once: true
-            }
+    // Animación de la sección "Por qué BIOS"
+    if (whyBiosRef.current) {
+      gsap.fromTo(
+        whyBiosRef.current,
+        { backgroundPosition: '50% 0px' },
+        {
+          backgroundPosition: '50% 100px',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: whyBiosRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
           }
-        );
-      }
-    });
+        }
+      );
 
-    // Animación del título del proceso
-    if (processTitleRef.current) {
-      gsap.fromTo(processTitleRef.current,
-        { y: 40, opacity: 0 },
+      gsap.fromTo(
+        whyBiosRef.current.querySelector('.why-bios-title'),
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: processTitleRef.current,
-            start: 'top 80%',
-            once: true
+            trigger: whyBiosRef.current,
+            start: 'top 75%',
           }
         }
       );
-    }
 
-    // Animación de los pasos del proceso
-    if (processStepsRef.current) {
-      const steps = processStepsRef.current.querySelectorAll('.process-step');
-      gsap.fromTo(steps,
-        { y: 50, opacity: 0, scale: 0.9 },
+      const teamItems = whyBiosRef.current.querySelectorAll('.team-member');
+      gsap.fromTo(
+        teamItems,
+        { y: 50, opacity: 0, scale: 0.8 },
         {
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: 'back.out(1.2)',
+          duration: 0.6,
+          stagger: {
+            amount: 0.8,
+            grid: [3, 3],
+            from: "center"
+          },
+          ease: 'elastic.out(1, 0.5)',
           scrollTrigger: {
-            trigger: processStepsRef.current,
-            start: 'top 75%',
-            once: true
+            trigger: whyBiosRef.current.querySelector('.team-grid'),
+            start: 'top 80%',
           }
         }
       );
-
-      // Animación de los números
-      steps.forEach((step, index) => {
-        const number = step.querySelector('.step-number');
-        gsap.fromTo(number,
-          { scale: 0, rotation: -180 },
-          {
-            scale: 1,
-            rotation: 0,
-            duration: 0.6,
-            ease: 'back.out(2)',
-            scrollTrigger: {
-              trigger: step,
-              start: 'top 80%',
-              once: true
-            }
-          }
-        );
-      });
     }
 
     // Animación del CTA
     if (ctaRef.current) {
-      gsap.fromTo(ctaRef.current,
-        { y: 30, opacity: 0 },
+      gsap.fromTo(
+        ctaRef.current,
+        { scale: 0.8, opacity: 0 },
         {
-          y: 0,
+          scale: 1,
           opacity: 1,
           duration: 1,
-          ease: 'power3.out',
+          ease: 'elastic.out(1, 0.3)',
           scrollTrigger: {
             trigger: ctaRef.current,
-            start: 'top 85%',
-            once: true
+            start: 'top 90%',
           }
         }
       );
@@ -203,181 +166,204 @@ const Services = () => {
   }, []);
 
   return (
-    <section className="section services-page">
+    <section className="section services-page-new-wrapper" style={{ padding: 0 }}>
+      {/* Hero Section */}
+      <div className="services-hero-new parallax-wrapper" ref={heroRef}>
+        <div className="container">
+          <h1>{t('services.title')}</h1>
+          <p className="services-subtitle">{t('services.subtitle')}</p>
+        </div>
+      </div>
+
       <div className="container">
-        <div className="section-title services-hero">
-          <h2 ref={titleRef}>{t('services.title')}</h2>
-          <p ref={subtitleRef} className="typewriter-subtitle">
-            {typewriterText}
-            <span className={`typewriter-cursor ${showCursor ? 'visible' : ''}`}>|</span>
-          </p>
-        </div>
-
-        {/* Servicio 1: Diseño Arquitectónico */}
-        <div className="service-detail" ref={service1Ref}>
-          <div className="about-content">
-            <div className="about-text">
-              <h3>{t('services.architecturalDesign')}</h3>
-              <p>
-                {currentLang === 'es'
-                  ? 'Desarrollamos proyectos arquitectónicos desde la concepción inicial hasta el diseño final, priorizando la integración con el entorno natural y las estrategias pasivas de confort térmico.'
-                  : 'We develop architectural projects from initial conception to final design, prioritizing integration with the natural environment and passive thermal comfort strategies.'}
-              </p>
-              <ul>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Diseño conceptual y desarrollo de ideas'
-                    : 'Conceptual design and idea development'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Estudios de orientación solar y ventilación'
-                    : 'Solar orientation and ventilation studies'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Selección de materiales sostenibles'
-                    : 'Selection of sustainable materials'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Integración de espacios interiores y exteriores'
-                    : 'Integration of indoor and outdoor spaces'}
-                </li>
-              </ul>
+        {/* Service Index */}
+        <div className="service-index-section" ref={serviceIndexRef}>
+          <div className="service-index-grid">
+            <div className="service-index-card">
+              <div className="service-card-number">01</div>
+              <h3>{t('services.service1')}</h3>
+              <p className="service-card-description">{t('services.service1Short')}</p>
+              <a href="#estudios-preliminares" className="service-link">
+                {t('services.moreInfo')} <i className="fas fa-arrow-right"></i>
+              </a>
             </div>
-            <div className="about-image">
-              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Diseño Arquitectónico" />
+
+            <div className="service-index-card">
+              <div className="service-card-number">02</div>
+              <h3>{t('services.service2')}</h3>
+              <p className="service-card-description">{t('services.service2Short')}</p>
+              <a href="#diseno-arquitectonico" className="service-link">
+                {t('services.moreInfo')} <i className="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div className="service-index-card">
+              <div className="service-card-number">03</div>
+              <h3>{t('services.service3')}</h3>
+              <p className="service-card-description">{t('services.service3Short')}</p>
+              <a href="#planos-constructivos" className="service-link">
+                {t('services.moreInfo')} <i className="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div className="service-index-card">
+              <div className="service-card-number">04</div>
+              <h3>{t('services.service4')}</h3>
+              <p className="service-card-description">{t('services.service4Short')}</p>
+              <a href="#direccion-obra" className="service-link">
+                {t('services.moreInfo')} <i className="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div className="service-index-card">
+              <div className="service-card-number">05</div>
+              <h3>{t('services.service5')}</h3>
+              <p className="service-card-description">{t('services.service5Short')}</p>
+              <a href="#diseno-interno" className="service-link">
+                {t('services.moreInfo')} <i className="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div className="service-index-card">
+              <div className="service-card-number">06</div>
+              <h3>{t('services.service6')}</h3>
+              <p className="service-card-description">{t('services.service6Short')}</p>
+              <a href="#tramitologia" className="service-link">
+                {t('services.moreInfo')} <i className="fas fa-arrow-right"></i>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Servicio 2: Planos Constructivos */}
-        <div className="service-detail" ref={service2Ref}>
-          <div className="about-content">
-            <div className="about-image">
-              <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Planos Constructivos" />
+        {/* Scope Section - Alternating Cards */}
+        <div className="scope-section" ref={scopeSectionRef}>
+          <h2 className="scope-main-title">{t('services.scopeTitle')}</h2>
+
+          <div className="alternating-cards">
+            {/* Item 1: Left */}
+            <div className="service-card left" id="estudios-preliminares">
+              <div className="card-number">01</div>
+              <div className="card-content">
+                <h3 className="card-title">{t('services.preliminaryStudies')}</h3>
+                <p className="card-desc">{t('services.service1Desc')}</p>
+                <div className="card-tags">
+                  <span className="tag"><i className="fas fa-map-marked-alt"></i> {t('services.siteVisit')}</span>
+                  <span className="tag"><i className="fas fa-users"></i> {t('services.coordination')}</span>
+                  <span className="tag"><i className="fas fa-clipboard-list"></i> {t('services.analysisCollection')}</span>
+                  <span className="tag"><i className="fas fa-tree"></i> {t('services.masterPlan')}</span>
+                  <span className="tag"><i className="fas fa-ruler-combined"></i> {t('services.architecturalDistribution')}</span>
+                </div>
+              </div>
             </div>
-            <div className="about-text">
-              <h3>{t('services.constructionPlans')}</h3>
-              <p>
-                {currentLang === 'es'
-                  ? 'Elaboramos planos técnicos detallados para permisos de construcción y ejecución de obra, garantizando precisión y cumplimiento normativo.'
-                  : 'We develop detailed technical plans for construction permits and project execution, ensuring accuracy and regulatory compliance.'}
-              </p>
-              <ul>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Planos arquitectónicos completos'
-                    : 'Complete architectural plans'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Planos estructurales y de instalaciones'
-                    : 'Structural and installation plans'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Documentación para permisos municipales'
-                    : 'Documentation for municipal permits'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Especificaciones técnicas y memorias de cálculo'
-                    : 'Technical specifications and calculation reports'}
-                </li>
-              </ul>
+
+            {/* Item 2: Right */}
+            <div className="service-card right" id="diseno-arquitectonico">
+              <div className="card-number">02</div>
+              <div className="card-content">
+                <h3 className="card-title">{t('services.preliminaryProject')}</h3>
+                <p className="card-desc">{t('services.service2Desc')}</p>
+                <div className="card-tags">
+                  <span className="tag"><i className="fas fa-image"></i> {t('services.photorealisticRenderings')}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Item 3: Left */}
+            <div className="service-card left" id="planos-constructivos">
+              <div className="card-number">03</div>
+              <div className="card-content">
+                <h3 className="card-title">{t('services.constructionPlans')}</h3>
+                <p className="card-desc">{t('services.service3Desc')}</p>
+                <div className="card-tags">
+                  <span className="tag"><i className="fas fa-drafting-compass"></i> {t('services.architecturalPlans')}</span>
+                  <span className="tag"><i className="fas fa-building"></i> {t('services.structuralPlans')}</span>
+                  <span className="tag"><i className="fas fa-bolt"></i> {t('services.electricalPlans')}</span>
+                  <span className="tag"><i className="fas fa-seedling"></i> {t('services.landscapePlans')}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Item 4: Right */}
+            <div className="service-card right" id="direccion-obra">
+              <div className="card-number">04</div>
+              <div className="card-content">
+                <h3 className="card-title">{t('services.service4')}</h3>
+                <p className="card-desc">{t('services.service4Desc')}</p>
+              </div>
+            </div>
+
+            {/* Item 5: Left */}
+            <div className="service-card left" id="diseno-interno">
+              <div className="card-number">05</div>
+              <div className="card-content">
+                <h3 className="card-title">{t('services.interiorDesign')}</h3>
+                <p className="card-desc">{t('services.service5Desc')}</p>
+              </div>
+            </div>
+
+            {/* Item 6: Right */}
+            <div className="service-card right" id="tramitologia">
+              <div className="card-number">06</div>
+              <div className="card-content">
+                <h3 className="card-title">{t('services.permits')}</h3>
+                <p className="card-desc">{t('services.service6Desc')}</p>
+                <div className="card-tags">
+                  <span className="tag"><i className="fas fa-building"></i> {t('services.condoAdmin')}</span>
+                  <span className="tag"><i className="fas fa-certificate"></i> {t('services.cfia')}</span>
+                  <span className="tag"><i className="fas fa-city"></i> {t('services.municipalities')}</span>
+                  <span className="tag"><i className="fas fa-leaf"></i> {t('services.setena')}</span>
+                  <span className="tag"><i className="fas fa-shield-alt"></i> {t('services.ins')}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Servicio 3: Dirección de Obra */}
-        <div className="service-detail" ref={service3Ref}>
-          <div className="about-content">
-            <div className="about-text">
-              <h3>{t('services.constructionManagement')}</h3>
-              <p>
-                {currentLang === 'es'
-                  ? 'Supervisamos y coordinamos el proceso constructivo para garantizar la calidad, el cumplimiento del diseño y el respeto al presupuesto establecido.'
-                  : 'We supervise and coordinate the construction process to ensure quality, design compliance and respect for the established budget.'}
-              </p>
-              <ul>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Supervisión técnica de la construcción'
-                    : 'Technical supervision of construction'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Coordinación con contratistas y proveedores'
-                    : 'Coordination with contractors and suppliers'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Control de calidad y cumplimiento normativo'
-                    : 'Quality control and regulatory compliance'}
-                </li>
-                <li>
-                  {currentLang === 'es'
-                    ? 'Seguimiento de avances y programación'
-                    : 'Progress tracking and scheduling'}
-                </li>
-              </ul>
-            </div>
-            <div className="about-image">
-              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Dirección de Obra" />
+        {/* Why BIOS Section */}
+        <div className="why-bios-section" ref={whyBiosRef}>
+          <h2 className="why-bios-title">{t('services.whyBios')}</h2>
+          <p className="why-bios-text">{t('services.whyBiosText')}</p>
+
+          <div className="team-section">
+            <h3 className="team-title">{t('services.multidisciplinaryTeam')}</h3>
+            <div className="team-grid">
+              <div className="team-member">
+                <i className="fas fa-pencil-ruler"></i>
+                <span>{t('services.architects')}</span>
+              </div>
+              <div className="team-member">
+                <i className="fas fa-couch"></i>
+                <span>{t('services.interiorDesigner')}</span>
+              </div>
+              <div className="team-member">
+                <i className="fas fa-hard-hat"></i>
+                <span>{t('services.structuralEngineer')}</span>
+              </div>
+              <div className="team-member">
+                <i className="fas fa-plug"></i>
+                <span>{t('services.electromechanicalEngineer')}</span>
+              </div>
+              <div className="team-member">
+                <i className="fas fa-tasks"></i>
+                <span>{t('services.projectManager')}</span>
+              </div>
+              <div className="team-member">
+                <i className="fas fa-calculator"></i>
+                <span>{t('services.budgetSpecialist')}</span>
+              </div>
+              <div className="team-member">
+                <i className="fas fa-map"></i>
+                <span>{t('services.surveyors')}</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Proceso de Trabajo */}
-        <div className="process-section">
-          <div className="section-title" ref={processTitleRef}>
-            <h3>{t('services.ourProcess')}</h3>
-          </div>
-          <div className="process-steps" ref={processStepsRef}>
-            <div className="process-step">
-              <div className="step-number">1</div>
-              <h4>{t('services.initialConsultation')}</h4>
-              <p>
-                {currentLang === 'es'
-                  ? 'Reunión para entender tus necesidades, expectativas y requerimientos específicos del proyecto.'
-                  : 'Meeting to understand your needs, expectations and specific project requirements.'}
-              </p>
-            </div>
-            <div className="process-step">
-              <div className="step-number">2</div>
-              <h4>{t('services.conceptualDesign')}</h4>
-              <p>
-                {currentLang === 'es'
-                  ? 'Desarrollo de ideas y propuestas iniciales basadas en el análisis del sitio y tus requerimientos.'
-                  : 'Development of ideas and initial proposals based on site analysis and your requirements.'}
-              </p>
-            </div>
-            <div className="process-step">
-              <div className="step-number">3</div>
-              <h4>{t('services.technicalDevelopment')}</h4>
-              <p>
-                {currentLang === 'es'
-                  ? 'Elaboración de planos constructivos, especificaciones técnicas y documentación completa.'
-                  : 'Development of construction plans, technical specifications and complete documentation.'}
-              </p>
-            </div>
-            <div className="process-step">
-              <div className="step-number">4</div>
-              <h4>{t('services.executionMonitoring')}</h4>
-              <p>
-                {currentLang === 'es'
-                  ? 'Supervisión de la construcción y acompañamiento durante todo el proceso.'
-                  : 'Construction supervision and accompaniment throughout the process.'}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Llamada a la acción */}
-        <div className="view-more" ref={ctaRef}>
-          <Link to="/contact" className="btn">{t('services.requestQuote')}</Link>
+        {/* CTA */}
+        <div className="services-cta" ref={ctaRef}>
+          <Link to="/contact" className="btn btn-primary">
+            {t('services.requestQuote')}
+          </Link>
         </div>
       </div>
     </section>

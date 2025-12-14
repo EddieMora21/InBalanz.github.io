@@ -12,6 +12,9 @@ import ProjectDetail from './pages/ProjectDetail'
 import Services from './pages/Services'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Renders from './pages/Renders'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -31,6 +34,9 @@ function App() {
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
+        <Route path="/renders" element={<Renders />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <WhatsAppButton />
