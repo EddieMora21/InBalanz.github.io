@@ -248,7 +248,7 @@ const ProjectDetail = () => {
           display: 'flex',
           flexDirection: 'column'
         }}>
-          {project.images.map((img, i) => (
+          {project.images.slice(0, 3).map((img, i) => (
             <div key={i} style={{ height: '100vh', width: '100%' }}>
               <img src={img} alt="Project detail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>

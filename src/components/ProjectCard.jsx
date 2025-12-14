@@ -14,8 +14,13 @@ const ProjectCard = ({ project }) => {
           <p>{currentLang === 'es' ? project.shortDescription.es : project.shortDescription.en}</p>
         </div>
       </div>
+      <span className="project-card-btn">
+        {currentLang === 'es' ? 'Ver Proyecto' : 'View Project'}
+        <i className="fas fa-arrow-right"></i>
+      </span>
     </Link>
   );
 };
 
 export default ProjectCard;
+

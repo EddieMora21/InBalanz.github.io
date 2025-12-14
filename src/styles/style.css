@@ -562,6 +562,60 @@ nav {
     transform: translateY(0);
 }
 
+/* Project Card Button - Always Visible on Mobile, Hover on Desktop */
+.project-card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.project-card-btn i {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+/* Desktop: Hidden by default, show on hover */
+@media (min-width: 769px) {
+    .project-card-btn {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    .project-card:hover .project-card-btn {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.project-card-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 6px 25px rgba(92, 114, 5, 0.4);
+}
+
+.project-card-btn:hover i {
+    transform: translateX(4px);
+}
+
 /* Botón de Ver más - OCULTO (la carta completa es clickeable) */
 .btn-project {
     display: none;
