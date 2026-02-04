@@ -32,6 +32,7 @@ const resources = {
         filterCommercial: 'Comercial',
         filterRemodeling: 'Remodelación',
         filterVisualizations: 'Anteproyectos',
+        filterRenders: 'Renders',
         category: 'Categoría',
         client: 'Cliente',
         location: 'Ubicación',
@@ -54,6 +55,9 @@ const resources = {
         title: 'SERVICIOS',
         subtitle: 'Soluciones integrales para transformar tu visión en realidad',
         moreInfo: 'Más información',
+        architecturalDesign: 'Diseño Arquitectónico',
+        constructionPlans: 'Planos Constructivos',
+        constructionManagement: 'Dirección de Obra',
         // Service Index
         service1: 'Estudios preliminares',
         service1Short: 'Análisis del terreno y normativa para decisiones claras.',
@@ -147,6 +151,7 @@ const resources = {
           levels: 'Niveles'
         },
         price: 'Precio Estimado',
+        inquire_price: 'Consultar Precio',
         inquire: 'Consultar por este diseño'
       },
       // Blog
@@ -215,6 +220,7 @@ const resources = {
         filterCommercial: 'Commercial',
         filterRemodeling: 'Remodeling',
         filterVisualizations: 'Preliminary Projects',
+        filterRenders: 'Renders',
         category: 'Category',
         client: 'Client',
         location: 'Location',
@@ -228,8 +234,41 @@ const resources = {
       // Testimonials
       testimonials: {
         title: 'What Our Clients Say',
-        service4: 'BIM CONSTRUCTION PLANS',
-        service5: 'PERMITTING',
+        subtitle: 'Real experiences from those who trusted us',
+        detailedTitle: 'Detailed Testimonials',
+        detailedSubtitle: 'Complete stories of completed projects'
+      },
+      services: {
+        title: 'SERVICES',
+        subtitle: 'Comprehensive solutions to transform your vision into reality',
+        moreInfo: 'More information',
+        architecturalDesign: 'Architectural Design',
+        constructionPlans: 'Construction Plans',
+        constructionManagement: 'Construction Management',
+        // Service Index
+        service1: 'Preliminary Studies',
+        service1Short: 'Site analysis and regulations for clear decisions.',
+        service1Desc: 'We analyze the site, regulations, and your needs to fully understand the project before designing. We gather technical information, make necessary inquiries to the corresponding institutions, and provide you with a base report to make decisions with greater clarity.',
+
+        service2: 'Preliminary Project',
+        service2Short: 'Spatial proposal and 3D visualization of your idea.',
+        service2Desc: 'This is where your idea takes shape. We develop a spatial and functional proposal aligned with your needs, climate, site, and current regulations. Includes a preliminary cost estimate, plans that allow visualizing the project concept, and high-quality renderings to know your project before building it.',
+
+        service3: 'Construction Plans',
+        service3Short: 'Complete technical guide for project execution.',
+        service3Desc: 'In this phase, we prepare the necessary plans to build the project accurately: distribution, structure, and installations, supported by their respective calculations. They are the technical guide that ensures the project is executed exactly as designed.',
+
+        service4: 'Construction Management',
+        service4Short: 'Supervision to guarantee quality and design fidelity.',
+        service4Desc: 'We supervise on-site execution to ensure construction complies with plans, technical specifications, and good construction practices. We accompany the process to ensure quality, order, and consistency with the design at every stage of the work.',
+
+        service5: 'Interior Design',
+        service5Short: 'Harmonious and functional interiors tailored to you.',
+        service5Desc: 'We create spaces that feel harmonious, functional, and true to your lifestyle. We define materials, colors, furniture, and setting to achieve balanced, comfortable interiors consistent with the project architecture. Everything designed so that each environment is lived with identity and well-being.',
+
+        service6: 'Permitting',
+        service6Short: 'Permit management and procedures without complications.',
+        service6Desc: 'We take care of managing the permits and requirements needed before the corresponding institutions, so your project advances without complications. We coordinate plans, documents, and technical reviews, ensuring everything complies with regulations and is approved in an orderly and efficient manner.',
 
         // Scope Section
         scopeTitle: 'SCOPE',
@@ -251,14 +290,14 @@ const resources = {
         interiorDesignDesc: 'Process that works with photorealistic images and includes distribution, furniture proposal, color palette, textures and materials, and decorative accessories.',
 
         // Construction Plans
-        constructionPlans: 'CONSTRUCTION PLANS',
+        constructionPlansTitle: 'CONSTRUCTION PLANS',
         architecturalPlans: 'Architectural plans with project detail sheets.',
         structuralPlans: 'Structural plans prepared by the structural engineer.',
         electricalPlans: 'Electrical and mechanical plans prepared by the electromechanical engineer.',
         landscapePlans: 'Landscape plans prepared by a specialist.',
 
         // Permitting
-        permits: 'PERMITTING',
+        permitsTitle: 'PERMITTING',
         permitsDesc: 'Procedures with the institutions required by the project',
         condoAdmin: 'Condominium administration',
         cfia: 'Federated College of Engineers and Architects (CFIA)',
@@ -299,6 +338,7 @@ const resources = {
           levels: 'Levels'
         },
         price: 'Estimated Price',
+        inquire_price: 'Inquire for Price',
         inquire: 'Inquire about this design'
       },
       // Blog

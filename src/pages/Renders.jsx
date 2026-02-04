@@ -7,49 +7,84 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Renders = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [activeFilter, setActiveFilter] = useState('all');
     const mainRef = useRef(null);
+    const currentLang = i18n.language || 'es';
 
-    // Mock Data for Catalog with multiple images
+    // Data for designs for sale
     const projects = [
         {
             id: 1,
-            title: "Casa Horizonte",
-            category: "modern",
-            description: "Un diseño que abraza la línea del horizonte, maximizando las vistas y la luz natural. Espacios abiertos que fluyen entre el interior y el exterior.",
-            specs: { area: "250 m²", bedrooms: 3, bathrooms: 2.5, levels: 2 },
-            price: "$1,200",
+            title: "Villa Punta Leona",
+            category: "tropical",
+            description: {
+                es: "El proyecto se concibe como un conjunto de hospedaje tipo Airbnb integrado a un entorno natural, donde la arquitectura busca potenciar la experiencia de descanso y disfrute del lugar. La implantación aprovecha la vegetación y las visuales, generando una sensación de retiro y conexión con la naturaleza.",
+                en: "The project is conceived as an Airbnb-type lodging complex integrated into a natural environment, where the architecture seeks to enhance the experience of rest and enjoyment of the place. The implantation takes advantage of the vegetation and views, generating a sense of retreat and connection with nature."
+            },
+            specs: { area: "450 m²", bedrooms: 5, bathrooms: 4, levels: 2 },
+            price: "Consultar",
             images: [
-                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                "/images/projects/villa-punta-leona/1.webp",
+                "/images/projects/villa-punta-leona/2.webp",
+                "/images/projects/villa-punta-leona/3.webp",
+                "/images/projects/villa-punta-leona/4.webp",
+                "/images/projects/villa-punta-leona/5.webp"
             ]
         },
         {
             id: 2,
-            title: "Villa Tropical",
+            title: "Residencia Punta Leona",
             category: "tropical",
-            description: "Arquitectura vernácula reinterpretada para la vida moderna. Techos altos, ventilación cruzada y materiales naturales que se integran con la selva.",
-            specs: { area: "180 m²", bedrooms: 2, bathrooms: 2, levels: 1 },
-            price: "$950",
+            description: {
+                es: "Una variante de diseño residencial enfocada en la privacidad y la integración con el paisaje costero. Espacios abiertos, ventilación cruzada y una materialidad que dialoga con el entorno tropical.",
+                en: "A residential design variant focused on privacy and integration with the coastal landscape. Open spaces, cross ventilation, and a materiality that dialogues with the tropical environment."
+            },
+            specs: { area: "320 m²", bedrooms: 3, bathrooms: 3, levels: 2 },
+            price: "Consultar",
             images: [
-                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                "/images/projects/villa-punta-leona/6.webp",
+                "/images/projects/villa-punta-leona/7.webp",
+                "/images/projects/villa-punta-leona/8.webp",
+                "/images/projects/villa-punta-leona/9.webp",
+                "/images/projects/villa-punta-leona/10.webp"
             ]
         },
         {
             id: 3,
-            title: "Loft Industrial",
-            category: "industrial",
-            description: "Estética cruda y refinada. Estructuras de acero expuestas, grandes ventanales y una distribución tipo loft ideal para la vida urbana.",
-            specs: { area: "120 m²", bedrooms: 1, bathrooms: 1.5, levels: 2 },
-            price: "$800",
+            title: "Apartamentos Quepos",
+            category: "modern",
+            description: {
+                es: "Este proyecto de hospedaje se concibe a partir de volumetrías que buscan generar una imagen contemporánea y acogedora. Los interiores se caracterizan por alturas generosas que favorecen la ventilación natural y el confort térmico.",
+                en: "This lodging project is conceived from volumes that seek to generate a contemporary and welcoming image. The interiors are characterized by generous heights that favor natural ventilation and thermal comfort."
+            },
+            specs: { area: "180 m²", bedrooms: 2, bathrooms: 2, levels: 1 },
+            price: "Consultar",
             images: [
-                "https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600566752355-35792bedcfe1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                "https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                "/images/projects/apartamentos-quepos/1.webp",
+                "/images/projects/apartamentos-quepos/2.webp",
+                "/images/projects/apartamentos-quepos/3.webp",
+                "/images/projects/apartamentos-quepos/4.webp",
+                "/images/projects/apartamentos-quepos/5.webp",
+                "/images/projects/apartamentos-quepos/6.webp",
+                "/images/projects/apartamentos-quepos/7.webp"
+            ]
+        },
+        {
+            id: 4,
+            title: "City View",
+            category: "modern",
+            description: {
+                es: "El proyecto se implanta en un contexto urbano con fuerte presencia natural. La volumetría se organiza mediante cuerpos escalonados que se adaptan al terreno y orientan los espacios principales hacia las vistas urbanas.",
+                en: "The project is implemented in an urban context with a strong natural presence. The volumetry is organized through stepped bodies that adapt to the terrain and orient the main spaces toward urban views."
+            },
+            specs: { area: "210 m²", bedrooms: 3, bathrooms: 2.5, levels: 2 },
+            price: "Consultar",
+            images: [
+                "/images/projects/city-view/1.webp",
+                "/images/projects/city-view/2.webp",
+                "/images/projects/city-view/3.webp",
+                "/images/projects/city-view/4.webp"
             ]
         }
     ];
@@ -73,7 +108,6 @@ const Renders = () => {
                         end: 'bottom bottom',
                         pin: info,
                         scrub: true,
-                        // markers: true, // Uncomment for debugging
                     });
                 }
             });
@@ -86,7 +120,7 @@ const Renders = () => {
         <div className="renders-page" ref={mainRef}>
             {/* Hero Section */}
             <section className="renders-hero" style={{
-                backgroundImage: 'linear-gradient(rgba(0, 35, 53, 0.8), rgba(0, 35, 53, 0.8)), url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80)',
+                backgroundImage: 'linear-gradient(rgba(0, 35, 53, 0.8), rgba(0, 35, 53, 0.8)), url(/images/projects/city-view/1.webp)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 height: '60vh',
@@ -182,7 +216,7 @@ const Renders = () => {
                                     color: '#555',
                                     marginBottom: '30px'
                                 }}>
-                                    {project.description}
+                                    {project.description[currentLang]}
                                 </p>
 
                                 <div className="specs-grid" style={{
@@ -214,7 +248,7 @@ const Renders = () => {
 
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
                                     <div style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--primary-color)' }}>
-                                        {project.price}
+                                        {project.price === 'Consultar' ? t('renders.inquire_price') || 'Consultar' : project.price}
                                     </div>
                                     <a href={`mailto:contacto@inbalanz.com?subject=Consulta sobre ${project.title}`} className="btn" style={{
                                         backgroundColor: 'var(--accent-color)',

@@ -36,10 +36,10 @@ const Home = () => {
 
   // Hero slider images
   const heroImages = [
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-    '/images/hero/arbol1.webp',
-    '/images/projects/casa-sanchez-barrantes/imagensecuendaria.webp',
-    '/images/hero/arbol2.webp'
+    '/images/projects/casa-sanchez-barrantes/1.webp',
+    '/images/projects/casa-mc/1.webp',
+    '/images/projects/apartamentos-quepos/1.webp',
+    '/images/projects/city-view/1.webp'
   ];
 
   // Rotating text with colors
@@ -65,7 +65,7 @@ const Home = () => {
         gsap.to(rotatingTextRef.current, {
           y: -30,
           opacity: 0,
-          duration: 0.5,
+          duration: 0.2,
           ease: 'power2.in',
           onComplete: () => {
             // Change slide
@@ -73,12 +73,12 @@ const Home = () => {
             // Animate text in
             gsap.fromTo(rotatingTextRef.current,
               { y: 30, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }
+              { y: 0, opacity: 1, duration: 0.2, ease: 'power2.out' }
             );
           }
         });
       }
-    }, 5000); // Change slide every 5 seconds
+    }, 2000); // Change slide every 2 seconds
 
     return () => clearInterval(interval);
   }, [heroImages.length]);

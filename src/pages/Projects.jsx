@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,11 +23,13 @@ const Projects = () => {
   const horizontalSectionRef = useRef(null);
   const horizontalContainerRef = useRef(null);
 
-  const categories = ['all', 'Residencial', 'Comercial', 'Remodelación', 'Visualizaciones'];
+  const categories = ['all', 'Residencial', 'Comercial', 'Remodelación', 'Renders'];
 
-  const filteredProjects = activeFilter === 'all'
-    ? projectsData
-    : projectsData.filter(project => project.category === activeFilter);
+  const filteredProjects = useMemo(() => {
+    return activeFilter === 'all'
+      ? projectsData
+      : projectsData.filter(project => project.category === activeFilter);
+  }, [activeFilter]);
 
   // Efecto de máquina de escribir
   useEffect(() => {
@@ -66,16 +68,16 @@ const Projects = () => {
       { y: 60, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
     )
-    .fromTo(heroSubtitleRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5, ease: 'power3.out' },
-      '-=0.3'
-    )
-    .fromTo(heroDescRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-      '-=0.5'
-    );
+      .fromTo(heroSubtitleRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: 'power3.out' },
+        '-=0.3'
+      )
+      .fromTo(heroDescRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+        '-=0.5'
+      );
 
     // Parallax en el hero
     gsap.to(heroRef.current, {
@@ -120,55 +122,69 @@ const Projects = () => {
 
     if (!horizontalContainerRef.current || !horizontalSectionRef.current) return;
 
-    const container = horizontalContainerRef.current;
-    const section = horizontalSectionRef.current;
-
-    // Limpiar animaciones previas
-    ScrollTrigger.getAll().forEach(trigger => {
-      if (trigger.vars.trigger === section) {
-        trigger.kill();
-      }
-    });
-
-    // Esperar renderizado
-    const timer = setTimeout(() => {
+    // Calcular si necesitamos scroll horizontal basado en el contenido real
+    const checkScrollNeeded = () => {
+      const container = horizontalContainerRef.current;
       const containerWidth = container.scrollWidth;
       const viewportWidth = window.innerWidth;
 
-      // Si el contenido cabe, no hacer scroll horizontal
-      if (containerWidth <= viewportWidth * 1.1) {
-        gsap.set(container, { x: 0 });
-        setNeedsHorizontalScroll(false);
-        return;
-      }
+      console.log('--- Debug InBalanz Scroll ---');
+      console.log('Active Category:', activeFilter);
+      console.log('Projects count:', filteredProjects.length);
+      console.log('Container scrollWidth:', containerWidth);
+      console.log('Viewport width:', viewportWidth);
 
-      setNeedsHorizontalScroll(true);
+      // Si el contenido cabe (con un pequeño margen), no necesitamos scroll
+      const isNeeded = containerWidth > viewportWidth * 1.05;
+      console.log('Determined needsHorizontalScroll:', isNeeded);
 
-      const scrollAmount = -(containerWidth - viewportWidth / 2);
-
-      gsap.to(container, {
-        x: scrollAmount,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: `+=${Math.abs(scrollAmount)}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1
-        }
+      setNeedsHorizontalScroll(prev => {
+        if (prev !== isNeeded) return isNeeded;
+        return prev;
       });
-    }, 100);
+      return isNeeded;
+    };
+
+    // Usar timeout para esperar a que el DOM se actualice con los nuevos proyectos
+    const ctx = gsap.context(() => {
+      const scrollNeeded = checkScrollNeeded();
+
+      if (scrollNeeded) {
+        const container = horizontalContainerRef.current;
+        const section = horizontalSectionRef.current;
+        const containerWidth = container.scrollWidth;
+        const viewportWidth = window.innerWidth;
+
+        const scrollAmount = -(containerWidth - viewportWidth / 2);
+        console.log('Calculated scrollAmount:', scrollAmount);
+
+        gsap.to(container, {
+          x: scrollAmount,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: `+=${Math.abs(scrollAmount)}`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          }
+        });
+      }
+    }, horizontalSectionRef);
+
+    // Refresh ScrollTrigger after a short delay to ensure correct measurements
+    const refreshTimer = setTimeout(() => {
+      console.log('Triggering ScrollTrigger.refresh()');
+      ScrollTrigger.refresh();
+    }, 400);
 
     return () => {
-      clearTimeout(timer);
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === section) {
-          trigger.kill();
-        }
-      });
+      ctx.revert();
+      clearTimeout(refreshTimer);
     };
-  }, [filteredProjects]);
+  }, [filteredProjects, i18n.language]);
 
   return (
     <div className="projects-page">
@@ -221,10 +237,10 @@ const Projects = () => {
             {t('projects.filterRemodeling')}
           </button>
           <button
-            className={`filter-btn ${activeFilter === 'Visualizaciones' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('Visualizaciones')}
+            className={`filter-btn ${activeFilter === 'Renders' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('Renders')}
           >
-            {t('projects.filterVisualizations')}
+            {t('projects.filterRenders')}
           </button>
         </div>
       </div>

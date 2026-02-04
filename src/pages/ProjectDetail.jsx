@@ -16,11 +16,23 @@ const ProjectDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Refs
   const mainRef = useRef(null);
   const heroRef = useRef(null);
   const horizontalSectionRef = useRef(null);
   const horizontalWrapperRef = useRef(null);
+  const mobileCarouselRef = useRef(null);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentGallerySlide, setCurrentGallerySlide] = useState(0);
 
   const project = projectsData.find(p => p.id === id);
 
@@ -28,8 +40,8 @@ const ProjectDetail = () => {
   const currentIndex = projectsData.findIndex(p => p.id === id);
   const nextProject = projectsData[(currentIndex + 1) % projectsData.length];
 
-  // Duplicate images for horizontal scroll effect if needed
-  const galleryImages = project ? [...project.images, ...project.images] : [];
+  // Gallery images for horizontal scroll
+  const galleryImages = project ? project.images : [];
 
   useLayoutEffect(() => {
     if (!project) return;
@@ -47,35 +59,67 @@ const ProjectDetail = () => {
         }
       });
 
-      // Pinned Story Section
+      // Pinned Story Section with Narrative Animation
       const storySection = document.querySelector('.story-section');
-      if (storySection && window.innerWidth > 768) {
-        const details = storySection.querySelector('.story-details');
-        const images = storySection.querySelector('.story-images');
+      if (storySection) {
+        if (!isMobile) {
+          const details = storySection.querySelector('.story-details');
 
-        ScrollTrigger.create({
-          trigger: storySection,
-          start: 'top top',
-          end: 'bottom bottom',
-          pin: details,
-          scrub: true
-        });
+          ScrollTrigger.create({
+            trigger: storySection,
+            start: 'top top',
+            end: 'bottom bottom',
+            pin: details,
+            scrub: true
+          });
+        }
+
+        if (!isMobile) {
+          // Chapter animation synced with images
+          const chapters = storySection.querySelectorAll('.narrative-chapter');
+          const images = storySection.querySelectorAll('.story-images > div');
+
+          images.forEach((image, i) => {
+            if (chapters[i]) {
+              ScrollTrigger.create({
+                trigger: image,
+                start: 'top 50%',
+                end: 'bottom 50%',
+                onEnter: () => {
+                  gsap.to(chapters, { opacity: 0, y: 20, visibility: 'hidden', duration: 0.4 });
+                  gsap.fromTo(chapters[i],
+                    { opacity: 0, y: 20, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.6, ease: 'power2.out' }
+                  );
+                },
+                onEnterBack: () => {
+                  gsap.to(chapters, { opacity: 0, y: 20, visibility: 'hidden', duration: 0.4 });
+                  gsap.fromTo(chapters[i],
+                    { opacity: 0, y: -20, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.6, ease: 'power2.out' }
+                  );
+                }
+              });
+            }
+          });
+        }
       }
 
-      // Horizontal Scroll Gallery
-      if (horizontalSectionRef.current && horizontalWrapperRef.current) {
-        const sections = gsap.utils.toArray('.horizontal-item');
-        const totalWidth = sections.length * 100; // 100vw per item or adjust based on width
+      // Horizontal Scroll Animation - Desktop Only
+      if (!isMobile && horizontalSectionRef.current && horizontalWrapperRef.current) {
+        const wrapper = horizontalWrapperRef.current;
+        const scrollWidth = wrapper.scrollWidth - window.innerWidth;
 
-        gsap.to(sections, {
-          xPercent: -100 * (sections.length - 1),
+        gsap.to(wrapper, {
+          x: -scrollWidth,
           ease: 'none',
           scrollTrigger: {
             trigger: horizontalSectionRef.current,
+            start: 'top top',
+            end: () => `+=${scrollWidth}`,
             pin: true,
             scrub: 1,
-            snap: 1 / (sections.length - 1),
-            end: () => "+=" + horizontalWrapperRef.current.offsetWidth
+            invalidateOnRefresh: true,
           }
         });
       }
@@ -99,7 +143,57 @@ const ProjectDetail = () => {
     }, mainRef);
 
     return () => ctx.revert();
-  }, [project, id]);
+  }, [project, id, isMobile]); // Added isMobile to dependency array
+
+  // Scroll listener for mobile carousel to sync dots
+  useEffect(() => {
+    const carousel = mobileCarouselRef.current;
+    if (isMobile && carousel) {
+      const handleScroll = () => {
+        const slideWidth = carousel.offsetWidth;
+        const newSlide = Math.round(carousel.scrollLeft / slideWidth);
+        if (newSlide !== currentSlide) {
+          setCurrentSlide(newSlide);
+        }
+      };
+      carousel.addEventListener('scroll', handleScroll);
+      return () => carousel.removeEventListener('scroll', handleScroll);
+    }
+  }, [isMobile, currentSlide]);
+
+  const scrollCarousel = (direction) => {
+    const carousel = mobileCarouselRef.current;
+    if (carousel) {
+      const slideWidth = carousel.offsetWidth;
+      const targetScroll = carousel.scrollLeft + (direction === 'next' ? slideWidth : -slideWidth);
+      carousel.scrollTo({ left: targetScroll, behavior: behavior }); // Fixed to use behavior variable if needed, or just stay behavior
+    }
+  };
+
+  // Scroll listener for horizontal gallery (Visual Gallery)
+  useEffect(() => {
+    const wrapper = horizontalWrapperRef.current;
+    if (isMobile && wrapper) {
+      const handleScroll = () => {
+        const itemWidth = wrapper.offsetWidth * 0.85 + 15; // 85vw width + 15px margin
+        const newSlide = Math.round(wrapper.scrollLeft / itemWidth);
+        if (newSlide !== currentGallerySlide) {
+          setCurrentGallerySlide(newSlide);
+        }
+      };
+      wrapper.addEventListener('scroll', handleScroll);
+      return () => wrapper.removeEventListener('scroll', handleScroll);
+    }
+  }, [isMobile, currentGallerySlide]);
+
+  const scrollGallery = (direction) => {
+    const wrapper = horizontalWrapperRef.current;
+    if (wrapper) {
+      const itemWidth = wrapper.offsetWidth * 0.85 + 15;
+      const targetScroll = wrapper.scrollLeft + (direction === 'next' ? itemWidth : -itemWidth);
+      wrapper.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -178,7 +272,7 @@ const ProjectDetail = () => {
       </div>
 
       {/* Intro Section */}
-      <section className="section" style={{ padding: '150px 0', backgroundColor: 'white' }}>
+      <section className="section" style={{ padding: isMobile ? '80px 0' : '150px 0', backgroundColor: 'white' }}>
         <div className="container">
           <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
             <p className="fade-up" style={{
@@ -194,7 +288,7 @@ const ProjectDetail = () => {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
               gap: '40px',
-              textAlign: 'left'
+              textAlign: isMobile ? 'center' : 'left'
             }}>
               <div>
                 <h4 style={{ color: '#999', textTransform: 'uppercase', fontSize: '0.8rem', marginBottom: '10px' }}>{t('projects.client')}</h4>
@@ -217,84 +311,370 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Pinned Story Section */}
+      {/* Pinned Story Section (Desktop) / Carousel (Mobile) */}
       <section className="story-section" style={{
-        display: 'flex',
-        flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
-        backgroundColor: '#f5f5f5'
+        backgroundColor: '#f5f5f5',
+        position: 'relative',
+        overflow: isMobile ? 'hidden' : 'visible'
       }}>
-        <div className="story-details" style={{
-          width: window.innerWidth <= 768 ? '100%' : '40%',
-          height: window.innerWidth <= 768 ? 'auto' : '100vh',
-          padding: '80px',
-          boxSizing: 'border-box',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          backgroundColor: '#f5f5f5'
-        }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '30px', color: 'var(--primary-color)' }}>
-            {currentLang === 'es' ? 'La Historia' : 'The Story'}
-          </h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#555', marginBottom: '30px' }}>
-            {project.description[currentLang]}
-          </p>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#555' }}>
-            {project.process[currentLang]}
-          </p>
-        </div>
-        <div className="story-images" style={{
-          width: window.innerWidth <= 768 ? '100%' : '60%',
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
-          {project.images.slice(0, 3).map((img, i) => (
-            <div key={i} style={{ height: '100vh', width: '100%' }}>
-              <img src={img} alt="Project detail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        {isMobile ? (
+          /* Mobile: Unified Horizontal Carousel */
+          <div className="mobile-story-container" style={{ position: 'relative' }}>
+            <div
+              ref={mobileCarouselRef}
+              className="mobile-story-carousel"
+              style={{
+                display: 'flex',
+                overflowX: 'auto',
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
+              {[
+                {
+                  num: '01',
+                  title: currentLang === 'es' ? 'La Historia' : 'The History',
+                  subtitle: currentLang === 'es' ? 'Origen y Contexto' : 'Origin & Context',
+                  text: project.description[currentLang].split('. ').slice(0, 3).join('. ') + '.',
+                  img: project.images[0]
+                },
+                {
+                  num: '02',
+                  title: currentLang === 'es' ? 'El Concepto' : 'The Concept',
+                  subtitle: currentLang === 'es' ? 'Filosofía de Diseño' : 'Design Philosophy',
+                  text: project.shortDescription[currentLang],
+                  img: project.images[1]
+                },
+                {
+                  num: '03',
+                  title: currentLang === 'es' ? 'Visión' : 'Vision',
+                  subtitle: currentLang === 'es' ? 'Relación con el Entorno' : 'Relationship with Nature',
+                  text: project.description[currentLang].split('. ').slice(3, 7).join('. ') + '.',
+                  img: project.images[2]
+                },
+                {
+                  num: '04',
+                  title: currentLang === 'es' ? 'Características' : 'Features',
+                  subtitle: currentLang === 'es' ? 'Atributos Clave' : 'Key Attributes',
+                  features: project.features[currentLang].slice(0, 4),
+                  img: project.images[3]
+                },
+                {
+                  num: '05',
+                  title: currentLang === 'es' ? 'El Proceso' : 'The Process',
+                  subtitle: currentLang === 'es' ? 'Desarrollo Técnico' : 'Technical Development',
+                  text: project.process[currentLang],
+                  img: project.images[4]
+                }
+              ].map((slide, i) => (
+                <div key={i} className="story-slide" style={{
+                  minWidth: '100%',
+                  scrollSnapAlign: 'start',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
+                  {/* Top: Text Content */}
+                  <div style={{ padding: '40px 25px', backgroundColor: '#f5f5f5' }}>
+                    <h2 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#999', marginBottom: '10px' }}>{slide.num}. {slide.title}</h2>
+                    <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--primary-color)' }}>{slide.subtitle}</h3>
+                    {slide.features ? (
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {slide.features.map((f, idx) => (
+                          <li key={idx} style={{ fontSize: '0.9rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+                            <i className="fas fa-check" style={{ color: 'var(--accent-color)', fontSize: '0.7rem' }}></i>
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p style={{ fontSize: '1rem', lineHeight: 1.6, color: '#333' }}>{slide.text}</p>
+                    )}
+
+                    {/* Dots Container (Synced) */}
+                    <div style={{
+                      marginTop: '25px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px'
+                    }}>
+                      {[0, 1, 2, 3, 4].map(dot => (
+                        <div key={dot} style={{
+                          width: dot === currentSlide ? '24px' : '8px',
+                          height: '4px',
+                          backgroundColor: dot === currentSlide ? 'var(--accent-color)' : '#ccc',
+                          borderRadius: '4px',
+                          transition: 'all 0.3s'
+                        }}></div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Bottom: Image */}
+                  <div style={{ height: '50vh', width: '100%' }}>
+                    <img src={slide.img} alt={slide.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+
+            {/* Navigation Arrows Overlay */}
+            {currentSlide > 0 && (
+              <button
+                onClick={() => scrollCarousel('prev')}
+                style={{
+                  position: 'absolute',
+                  left: '10px',
+                  top: '65%',
+                  transform: 'translateY(-50%)',
+                  width: '45px',
+                  height: '45px',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  backdropFilter: 'blur(10px)',
+                  border: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 20,
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                  color: 'var(--primary-color)'
+                }}
+              >
+                <i className="fas fa-chevron-left"></i>
+              </button>
+            )}
+            {currentSlide < 4 && (
+              <button
+                onClick={() => scrollCarousel('next')}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '65%',
+                  transform: 'translateY(-50%)',
+                  width: '45px',
+                  height: '45px',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  backdropFilter: 'blur(10px)',
+                  border: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 20,
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                  color: 'var(--primary-color)'
+                }}
+              >
+                <i className="fas fa-chevron-right"></i>
+              </button>
+            )}
+          </div>
+        ) : (
+          /* Desktop: GSAP Pinned Side-by-Side */
+          <div style={{ display: 'flex' }}>
+            <div className="story-details" style={{
+              width: '40%',
+              height: '100vh',
+              padding: '80px',
+              boxSizing: 'border-box',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              backgroundColor: '#f5f5f5',
+              position: 'relative'
+            }}>
+              <div className="narrative-chapters" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}>
+                <div className="narrative-chapter" data-chapter="0" style={{ opacity: 1, visibility: 'visible', transition: 'opacity 0.4s, transform 0.4s', width: '100%' }}>
+                  <h2 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#999', marginBottom: '10px' }}>01. {currentLang === 'es' ? 'La Historia' : 'The History'}</h2>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '30px', color: 'var(--primary-color)' }}>{currentLang === 'es' ? 'Origen y Contexto' : 'Origin & Context'}</h3>
+                  <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: '#333' }}>
+                    {project.description[currentLang].split('. ').slice(0, 3).join('. ') + '.'}
+                  </p>
+                </div>
+                <div className="narrative-chapter" data-chapter="1" style={{ position: 'absolute', top: '50%', left: 0, right: 0, transform: 'translateY(-50%)', opacity: 0, visibility: 'hidden', transition: 'opacity 0.4s, transform 0.4s' }}>
+                  <h2 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#999', marginBottom: '10px' }}>02. {currentLang === 'es' ? 'El Concepto' : 'The Concept'}</h2>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '30px', color: 'var(--primary-color)' }}>{currentLang === 'es' ? 'Filosofía de Diseño' : 'Design Philosophy'}</h3>
+                  <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: '#333' }}>
+                    {project.shortDescription[currentLang]}
+                  </p>
+                </div>
+                <div className="narrative-chapter" data-chapter="2" style={{ position: 'absolute', top: '50%', left: 0, right: 0, transform: 'translateY(-50%)', opacity: 0, visibility: 'hidden', transition: 'opacity 0.4s, transform 0.4s' }}>
+                  <h2 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#999', marginBottom: '10px' }}>03. {currentLang === 'es' ? 'Visión' : 'Vision'}</h2>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '30px', color: 'var(--primary-color)' }}>{currentLang === 'es' ? 'Relación con el Entorno' : 'Relationship with Nature'}</h3>
+                  <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: '#333' }}>
+                    {project.description[currentLang].split('. ').slice(3, 7).join('. ') + '.'}
+                  </p>
+                </div>
+                <div className="narrative-chapter" data-chapter="3" style={{ position: 'absolute', top: '50%', left: 0, right: 0, transform: 'translateY(-50%)', opacity: 0, visibility: 'hidden', transition: 'opacity 0.4s, transform 0.4s' }}>
+                  <h2 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#999', marginBottom: '10px' }}>04. {currentLang === 'es' ? 'Características' : 'Features'}</h2>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '30px', color: 'var(--primary-color)' }}>{currentLang === 'es' ? 'Atributos Clave' : 'Key Attributes'}</h3>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    {project.features[currentLang].slice(0, 4).map((f, i) => (
+                      <li key={i} style={{ fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <i className="fas fa-check" style={{ color: 'var(--accent-color)', fontSize: '0.7rem' }}></i>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="narrative-chapter" data-chapter="4" style={{ position: 'absolute', top: '50%', left: 0, right: 0, transform: 'translateY(-50%)', opacity: 0, visibility: 'hidden', transition: 'opacity 0.4s, transform 0.4s' }}>
+                  <h2 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '3px', color: '#999', marginBottom: '10px' }}>05. {currentLang === 'es' ? 'El Proceso' : 'The Process'}</h2>
+                  <h3 style={{ fontSize: '2.5rem', marginBottom: '30px', color: 'var(--primary-color)' }}>{currentLang === 'es' ? 'Desarrollo Técnico' : 'Technical Development'}</h3>
+                  <p style={{ fontSize: '1.2rem', lineHeight: 1.6, color: '#333' }}>
+                    {project.process[currentLang]}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="story-images" style={{ width: '60%', display: 'flex', flexDirection: 'column' }}>
+              {project.images.slice(0, 5).map((img, i) => (
+                <div key={i} style={{ height: '100vh', width: '100%' }}>
+                  <img src={img} alt="Project detail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Horizontal Scroll Gallery */}
-      <section ref={horizontalSectionRef} style={{
-        height: '100vh',
+      <section ref={horizontalSectionRef} className="horizontal-gallery-section" style={{
+        height: isMobile ? 'auto' : '100vh',
+        minHeight: isMobile ? '80vh' : '100vh',
         overflow: 'hidden',
         backgroundColor: '#111',
         display: 'flex',
-        alignItems: 'center'
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: isMobile ? '60px 0' : 0
       }}>
-        <div ref={horizontalWrapperRef} style={{ display: 'flex', height: '80vh', paddingLeft: '10vw' }}>
-          <div className="horizontal-item" style={{
-            minWidth: '40vw',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: '5vw',
-            color: 'white'
-          }}>
-            <div>
-              <h2 style={{ fontSize: '3rem', marginBottom: '20px' }}>
-                {currentLang === 'es' ? 'Galería Visual' : 'Visual Gallery'}
-              </h2>
-              <p style={{ opacity: 0.7 }}>
-                {currentLang === 'es' ? 'Desliza para explorar' : 'Scroll to explore'} &rarr;
-              </p>
-            </div>
+        {/* Mobile Title Section */}
+        {isMobile && (
+          <div className="mobile-gallery-info" style={{ padding: '0 25px', marginBottom: '30px', color: 'white' }}>
+            <h2 style={{ fontSize: '2rem', marginBottom: '10px' }}>
+              {currentLang === 'es' ? 'Galería Visual' : 'Visual Gallery'}
+            </h2>
+            <p style={{ opacity: 0.5, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {currentLang === 'es' ? 'Desliza para explorar' : 'Swipe to explore'} <i className="fas fa-arrow-right"></i>
+            </p>
           </div>
-          {galleryImages.map((img, i) => (
-            <div key={i} className="horizontal-item" style={{
-              minWidth: '60vw',
-              height: '100%',
-              marginRight: '5vw',
-              position: 'relative'
-            }}>
-              <img src={img} alt="Gallery" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                onClick={() => openModal(img)}
-              />
-            </div>
-          ))}
+        )}
+
+        <div className="horizontal-gallery-container" style={{ position: 'relative' }}>
+          <div ref={horizontalWrapperRef} className="horizontal-wrapper" style={{
+            display: 'flex',
+            height: isMobile ? '60vh' : '80vh',
+            paddingLeft: isMobile ? '25px' : '10vw',
+            overflowX: isMobile ? 'auto' : 'visible',
+            scrollSnapType: isMobile ? 'x mandatory' : 'none',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none'
+          }}>
+            {!isMobile && (
+              <div className="horizontal-item intro-item" style={{
+                minWidth: '40vw',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: '5vw',
+                color: 'white'
+              }}>
+                <div>
+                  <h2 style={{ fontSize: '3rem', marginBottom: '20px' }}>
+                    {currentLang === 'es' ? 'Galería Visual' : 'Visual Gallery'}
+                  </h2>
+                  <p style={{ opacity: 0.7 }}>
+                    {currentLang === 'es' ? 'Desliza para explorar' : 'Scroll to explore'} &rarr;
+                  </p>
+                </div>
+              </div>
+            )}
+            {galleryImages.map((img, i) => (
+              <div key={i} className="horizontal-item" style={{
+                minWidth: isMobile ? '85vw' : '65vw',
+                height: '100%',
+                marginRight: isMobile ? '15px' : '5vw',
+                position: 'relative',
+                scrollSnapAlign: 'start',
+                borderRadius: isMobile ? '15px' : 0,
+                overflow: 'hidden'
+              }}>
+                <img src={img} alt="Gallery" style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  cursor: 'pointer'
+                }}
+                  onClick={() => openModal(img)}
+                />
+                <div className="gallery-counter" style={{
+                  position: 'absolute',
+                  bottom: '20px',
+                  right: '20px',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '5px 12px',
+                  borderRadius: '20px',
+                  color: 'white',
+                  fontSize: '0.8rem'
+                }}>
+                  {i + 1} / {galleryImages.length}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Gallery Arrows Overlay (Mobile Only) */}
+          {isMobile && currentGallerySlide > 0 && (
+            <button
+              onClick={() => scrollGallery('prev')}
+              style={{
+                position: 'absolute',
+                left: '5px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255,255,255,0.2)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 20,
+                color: 'white'
+              }}
+            >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+          )}
+          {isMobile && currentGallerySlide < galleryImages.length - 1 && (
+            <button
+              onClick={() => scrollGallery('next')}
+              style={{
+                position: 'absolute',
+                right: '5px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255,255,255,0.2)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 20,
+                color: 'white'
+              }}
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
+          )}
         </div>
       </section>
 
@@ -351,7 +731,7 @@ const ProjectDetail = () => {
           <p style={{ textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '20px' }}>
             {currentLang === 'es' ? 'Siguiente Proyecto' : 'Next Project'}
           </p>
-          <h2 style={{ fontSize: '4rem', marginBottom: '30px' }}>{nextProject.title}</h2>
+          <h2 style={{ fontSize: isMobile ? '2.5rem' : '4rem', marginBottom: '30px' }}>{nextProject.title}</h2>
           <Link to={`/projects/${nextProject.id}`} className="btn-outline" style={{
             borderColor: 'white',
             color: 'white',
